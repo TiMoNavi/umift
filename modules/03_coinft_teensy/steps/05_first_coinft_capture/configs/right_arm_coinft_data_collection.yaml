@@ -76,9 +76,9 @@ coinft0:
     # left  = higher numbered active Teensy Serial/pins = coinft_2606602_0019
     # right = lower numbered active Teensy Serial/pins  = coinft_2606602_0008
     left_calibration_file: "<PATH_TO_DELIVERABLES>/modules/03_coinft_teensy/assets/calibration/production/coinft_2606602_0019/coinft_2606602_0019_MLP.onnx"
-    right_calibration_file: "<PATH_TO_DELIVERABLES>/modules/03_coinft_teensy/assets/calibration/production/coinft_2606602_0008/coinft_2606602_0008_MLP.onnx"
+    right_calibration_file: "<PATH_TO_DELIVERABLES>/modules/03_coinft_teensy/assets/calibration/production/coinft_2606602_0012/coinft_2606602_0012_MLP.onnx"
     left_normalization_file: "<PATH_TO_DELIVERABLES>/modules/03_coinft_teensy/assets/calibration/production/coinft_2606602_0019/coinft_2606602_0019_norm.json"
-    right_normalization_file: "<PATH_TO_DELIVERABLES>/modules/03_coinft_teensy/assets/calibration/production/coinft_2606602_0008/coinft_2606602_0008_norm.json"
+    right_normalization_file: "<PATH_TO_DELIVERABLES>/modules/03_coinft_teensy/assets/calibration/production/coinft_2606602_0012/coinft_2606602_0012_norm.json"
     noise_level: 0.0
     stall_threshold: 100
     Foffset: [0, 0, 0]
