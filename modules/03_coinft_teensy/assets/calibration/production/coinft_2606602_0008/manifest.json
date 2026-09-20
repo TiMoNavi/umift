@@ -5,7 +5,7 @@
   "teensy_connection": "higher numbered active Serial/pins",
   "calibration_date": "2026-06-25",
   "archived_at": "2026-06-25 07:02:54",
-  "source_folder": "<original-developer-machine>",
+  "source_folder": "historical calibration source; original archive not included",
   "runtime_files": {
     "onnx": "coinft_2606602_0008_MLP.onnx",
     "onnx_external_data": "CFT24_MLP.onnx.data",
@@ -34,6 +34,6 @@
   },
   "notes": [
     "Runtime ONNX loading requires the external data file named CFT24_MLP.onnx.data next to the ONNX file.",
-    "This model is assigned to left only under the current wiring rule."
+    "Historical calibration asset retained for traceability; it is not part of the current production left/right pair."
   ]
 }

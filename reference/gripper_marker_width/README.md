@@ -7,7 +7,7 @@
 恢复资料：
 
 ```text
-/Users/550m/code/umift_recovered_reference/umi_gripper_width_reference
+external recovery checkout/umi_gripper_width_reference
 ```
 
 关键文件：

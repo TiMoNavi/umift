@@ -10,20 +10,19 @@
 ## 入口
 
 - App 源码：
-  - [ios_app/UMIFTiPhoneCaptureCore](</Users/550m/code/UMIFT-datacollect/modules/02_iphone_gripper/ios_app/UMIFTiPhoneCaptureCore>)
+  - [ios_app/UMIFTiPhoneCaptureCore](../ios_app/UMIFTiPhoneCaptureCore)
 - 当前 Mac 端接收：
-  - [../04_laptop_alignment_export/entrypoints/iphone_stream_receiver.py](/Users/550m/code/UMIFT-datacollect/modules/04_laptop_alignment_export/entrypoints/iphone_stream_receiver.py)
-  - [../04_laptop_alignment_export/umift_laptop_alignment/capture/receivers/iphone/archive_receiver_v2.py](/Users/550m/code/UMIFT-datacollect/modules/04_laptop_alignment_export/umift_laptop_alignment/capture/receivers/iphone/archive_receiver_v2.py)
+  - [../04_laptop_alignment_export/entrypoints/iphone_stream_receiver.py](../../04_laptop_alignment_export/entrypoints/iphone_stream_receiver.py)
+  - [../04_laptop_alignment_export/umift_laptop_alignment/capture/receivers/iphone/archive_receiver_v2.py](../../04_laptop_alignment_export/umift_laptop_alignment/capture/receivers/iphone/archive_receiver_v2.py)
 - 旧 MVP 脚本：
-  - [tools/automate_capture_session.py](/Users/550m/code/UMIFT-datacollect/modules/02_iphone_gripper/tools/automate_capture_session.py)
-  - [tools/pull_latest_iphone_demo.py](/Users/550m/code/UMIFT-datacollect/modules/02_iphone_gripper/tools/pull_latest_iphone_demo.py)
+  - [tools/automate_capture_session.py](../tools/automate_capture_session.py)
+  - [tools/pull_latest_iphone_demo.py](../tools/pull_latest_iphone_demo.py)
   - 这些脚本只服务 `ios_app/legacy/UMIFTiPhoneCaptureMVP`，需要显式 legacy 参数才能运行。
 
 ## 推荐先看
 
-- [ios_app_status.md](/Users/550m/code/UMIFT-datacollect/modules/02_iphone_gripper/01_app_build_and_deploy/ios_app_status.md)
-- [automation_debugging.md](/Users/550m/code/UMIFT-datacollect/modules/02_iphone_gripper/01_app_build_and_deploy/automation_debugging.md)
-- [ios_app/UMIFTiPhoneCaptureCore/README.md](/Users/550m/code/UMIFT-datacollect/modules/02_iphone_gripper/ios_app/UMIFTiPhoneCaptureCore/README.md)
+- 当前 App 状态和自动化调试记录未单独随本交付包提供；以工程 README 和本目录脚本为准。
+- [ios_app/UMIFTiPhoneCaptureCore/README.md](../ios_app/UMIFTiPhoneCaptureCore/README.md)
 
 ## 当前边界
 

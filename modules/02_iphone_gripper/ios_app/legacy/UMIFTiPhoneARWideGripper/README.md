@@ -14,7 +14,4 @@
 3. 夹爪开合检测直接处理 `ARFrame.capturedImage`，不再启动第二个相机 session。
 4. 所有标定、识别阈值、ROI、路径坐标都重新建立，不能沿用 ultra-wide 版本参数。
 
-详细规划见：
-
-- [docs/arkit_wide_marker_plan.md](docs/arkit_wide_marker_plan.md)
-
+详细规划文档未随本交付包提供；本目录仅保留历史 App 工程和设计约束。

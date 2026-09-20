@@ -10,14 +10,14 @@
 
 ### 脚本
 
-- [scripts/coinft_teensy_smoke_test.py](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/steps/05_first_coinft_capture/scripts/coinft_teensy_smoke_test.py)
-- [scripts/umift_ft_timestampped_UART.py](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/steps/05_first_coinft_capture/scripts/umift_ft_timestampped_UART.py)
-- [scripts/capture_coinft_official_format.py](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/steps/05_first_coinft_capture/scripts/capture_coinft_official_format.py)
+- [scripts/coinft_teensy_smoke_test.py](scripts/coinft_teensy_smoke_test.py)
+- [scripts/umift_ft_timestampped_UART.py](scripts/umift_ft_timestampped_UART.py)
+- [scripts/capture_coinft_official_format.py](scripts/capture_coinft_official_format.py)
 
 ### 配置参考
 
-- [configs/right_arm_coinft.yaml](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/steps/05_first_coinft_capture/configs/right_arm_coinft.yaml)
-- [configs/right_arm_coinft_data_collection.yaml](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/steps/05_first_coinft_capture/configs/right_arm_coinft_data_collection.yaml)
+- [configs/right_arm_coinft.yaml](configs/right_arm_coinft.yaml)
+- [configs/right_arm_coinft_data_collection.yaml](configs/right_arm_coinft_data_collection.yaml)
 
 ## 先跑哪个
 

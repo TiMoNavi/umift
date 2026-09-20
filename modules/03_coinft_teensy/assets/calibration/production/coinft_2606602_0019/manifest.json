@@ -1,11 +1,11 @@
 {
   "schema": "umift.coinft.calibration_manifest.v1",
   "physical_coinft_id": "coinft_2606602_0019",
-  "current_slot": "right",
-  "teensy_connection": "lower numbered active Serial/pins",
+  "current_slot": "left",
+  "teensy_connection": "higher numbered active Serial/pins",
   "calibration_date": "2026-06-25",
   "archived_at": "2026-06-25 06:28:15",
-  "source_folder": "<original-developer-machine>",
+  "source_folder": ".",
   "runtime_files": {
     "onnx": "coinft_2606602_0019_MLP.onnx",
     "onnx_external_data": "CFT24_MLP.onnx.data",

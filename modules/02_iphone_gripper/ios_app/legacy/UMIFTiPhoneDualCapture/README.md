@@ -18,7 +18,7 @@ ARKit WorldTracking is the only camera owner
 
 详细迁移计划见：
 
-- [docs/arkit_private_ultrawide_migration_plan.md](/Users/550m/code/UMIFT-datacollect/modules/02_iphone_gripper/ios_app/UMIFTiPhoneDualCapture/docs/arkit_private_ultrawide_migration_plan.md)
+- ARKit private ultrawide 迁移方案属于历史记录，未随本包提供；该工程不作为当前采集入口。
 
 这份方案固定了：
 
@@ -58,7 +58,7 @@ ARKit pose: tracking normal
 ## 构建命令
 
 ```sh
-DEVELOPER_DIR=/Users/550m/Downloads/Xcode.app/Contents/Developer \
+DEVELOPER_DIR=Xcode.app/Contents/Developer \
 xcodebuild \
   -project UMIFTiPhoneDualCapture.xcodeproj \
   -scheme UMIFTiPhoneDualCapture \

@@ -32,7 +32,7 @@ DEDH 路线 = 数字参考传感器 + RS485 + Modbus/主动发送
 
 见：
 
-- [../../steps/02_coinft_calibration/code/coinft_data_collection.py](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/steps/02_coinft_calibration/code/coinft_data_collection.py)
+- [../../steps/02_coinft_calibration/code/coinft_data_collection.py](../../../steps/02_coinft_calibration/code/coinft_data_collection.py)
 
 当前脚本把下面这些写死了：
 

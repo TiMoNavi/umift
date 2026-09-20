@@ -14,8 +14,8 @@ Tx/Ty/Tz = 2Nm
 
 资料来源：
 
-- 桌面说明书 PDF：`/Users/550m/Desktop/DEDH-75D系列六分量力传感器(2026-1-5)(3).pdf`
-- 桌面说明书文本：`/Users/550m/Desktop/DEDH-75D系列六分量力传感器(2026-1-5)(3).txt`
+- 桌面说明书 PDF：`local DEDH manual PDF (not included)`
+- 桌面说明书文本：`local DEDH manual text (not included)`
 
 ## 这里回答什么
 
@@ -26,7 +26,7 @@ Tx/Ty/Tz = 2Nm
 
 ## 建议阅读顺序
 
-1. [docs/spec_summary.md](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/supporting_tools/dedh_reference_sensor/docs/spec_summary.md)
-2. [docs/coinft_calibration_substitution.md](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/supporting_tools/dedh_reference_sensor/docs/coinft_calibration_substitution.md)
-3. [docs/modbus_reader_usage.md](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/supporting_tools/dedh_reference_sensor/docs/modbus_reader_usage.md)
-4. [docs/open_questions.md](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/supporting_tools/dedh_reference_sensor/docs/open_questions.md)
+1. [docs/spec_summary.md](docs/spec_summary.md)
+2. [docs/coinft_calibration_substitution.md](docs/coinft_calibration_substitution.md)
+3. [docs/modbus_reader_usage.md](docs/modbus_reader_usage.md)
+4. `open_questions.md` 未随本包提供；现场问题以 `docs/spec_summary.md` 和实际硬件为准。

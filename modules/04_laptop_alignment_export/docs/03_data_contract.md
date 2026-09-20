@@ -306,7 +306,7 @@ python3 modules/04_laptop_alignment_export/entrypoints/export_run.py runs/<run_i
   --format umift-replay-buffer-zarr
 ```
 
-默认 registry 当前只开放 `umift-replay-buffer-zarr`：按 `/Users/550m/code/UMI-FT` 的 episode replay buffer 结构增量写 Zarr。历史调试/ForceFlow exporter 不再接入自动链路、GUI 或默认 CLI。
+默认 registry 当前只开放 `umift-replay-buffer-zarr`：按 `external UMI-FT source tree` 的 episode replay buffer 结构增量写 Zarr。历史调试/ForceFlow exporter 不再接入自动链路、GUI 或默认 CLI。
 
 `umift-replay-buffer-zarr` 的核心字段：
 

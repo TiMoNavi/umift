@@ -1,6 +1,6 @@
 # coinft_2606602_0012
 
-Archived: 2026-07-09 from `/Users/550m/Downloads/coinft_2606602_0012_model.zip`.
+Archived: 2026-07-09 from `historical model archive (not included)`.
 
 ## Model files
 

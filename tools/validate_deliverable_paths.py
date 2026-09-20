@@ -25,13 +25,17 @@ TEXT_SUFFIXES = {
     ".c", ".cc", ".cpp", ".h", ".hpp", ".ini", ".json", ".md", ".py",
     ".sh", ".swift", ".txt", ".yaml", ".yml",
 }
-SKIP_DIRS = {".pio", "__pycache__", "runs", "third_party"}
+SKIP_DIRS = {".git", ".pio", "__pycache__", "runs", "third_party"}
 PLACEHOLDERS = ("<PATH_TO_DELIVERABLES>", "<original-developer-machine>", "<conda-env>")
 ABSOLUTE_PATH_RE = re.compile(
     r"(?<![A-Za-z0-9_])/(?:Users|Volumes)/[^\s\"'`<>]+"
 )
 MARKDOWN_LINK_RE = re.compile(r"!?\[[^\]]*\]\(([^)]+)\)")
 PATH_FIELD_RE = re.compile(r"(?:path|file|manifest|onnx|norm|firmware|source)", re.I)
+YAML_PATH_LINE_RE = re.compile(
+    r"^\s*[A-Za-z0-9_.-]*(?:path|file|manifest|onnx|norm|firmware|calibration|normalization)[A-Za-z0-9_.-]*\s*:\s*['\"]?([^'\"#]+?)\s*['\"]?\s*$",
+    re.I,
+)
 TRAILING_PATH_PUNCTUATION = ".,;:)]}"
 
 
@@ -101,6 +105,8 @@ def add_external_path_findings(path: Path, text: str, findings: list[Finding], r
                 inside_root = False
             if not inside_root:
                 findings.append(Finding("external-absolute-path", path, line_number, raw))
+        if path.name == "validate_deliverable_paths.py":
+            continue
         for placeholder in PLACEHOLDERS:
             if placeholder in line:
                 findings.append(Finding("placeholder", path, line_number, placeholder))
@@ -152,6 +158,27 @@ def add_json_path_findings(path: Path, text: str, findings: list[Finding]) -> No
             findings.append(Finding("broken-json-path", path, line, f"{key}={raw_value}"))
 
 
+def add_yaml_path_findings(path: Path, text: str, findings: list[Finding], root: Path) -> None:
+    if path.suffix.lower() not in {".yaml", ".yml"}:
+        return
+    for line_number, line in enumerate(text.splitlines(), start=1):
+        match = YAML_PATH_LINE_RE.match(line)
+        if not match:
+            continue
+        value = match.group(1).strip()
+        if not value or value.lower() in {"true", "false", "null", "none"} or value.startswith(("http://", "https://", "<", "$", "/tmp/", "/dev/")):
+            continue
+        candidate = Path(value).expanduser()
+        if candidate.is_absolute():
+            resolved = candidate
+        elif value.startswith(("modules/", "reference/", "docs/", "schemas/", "tools/")):
+            resolved = root / candidate
+        else:
+            resolved = (path.parent / candidate).resolve()
+        if not resolved.exists():
+            findings.append(Finding("broken-yaml-path", path, line_number, value))
+
+
 def add_artifact_findings(root: Path, findings: list[Finding]) -> None:
     for directory, directory_names, file_names in os.walk(root):
         # A build directory can contain tens of thousands of files. Report the
@@ -186,6 +213,7 @@ def main() -> int:
         add_external_path_findings(path, text, findings, root)
         add_markdown_link_findings(path, text, findings)
         add_json_path_findings(path, text, findings)
+        add_yaml_path_findings(path, text, findings, root)
     add_artifact_findings(root, findings)
 
     if findings:

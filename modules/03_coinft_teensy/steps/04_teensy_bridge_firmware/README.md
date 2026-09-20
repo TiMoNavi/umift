@@ -74,7 +74,7 @@ right = 编号更低的 Teensy pins / active Serial = coinft_2606602_0012
 命令：
 
 ```bash
-cd /Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/steps/04_teensy_bridge_firmware/firmware
+cd ${UMIFT_ROOT}/modules/03_coinft_teensy/steps/04_teensy_bridge_firmware/firmware
 pio run
 pio run -t upload
 ```

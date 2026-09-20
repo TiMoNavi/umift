@@ -61,8 +61,8 @@ Intel-based macOS 不再支持
 
 ## 推荐阅读
 
-1. [docs/tool_selection.md](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/supporting_tools/kitprog_modustoolbox_programmer/docs/tool_selection.md)
-2. [docs/connection_guide.md](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/supporting_tools/kitprog_modustoolbox_programmer/docs/connection_guide.md)
-3. [docs/firmware_update_and_modes.md](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/supporting_tools/kitprog_modustoolbox_programmer/docs/firmware_update_and_modes.md)
-4. [docs/macos_support.md](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/supporting_tools/kitprog_modustoolbox_programmer/docs/macos_support.md)
-5. [docs/source_links.md](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/supporting_tools/kitprog_modustoolbox_programmer/docs/source_links.md)
+1. [docs/tool_selection.md](docs/tool_selection.md)
+2. [docs/connection_guide.md](docs/connection_guide.md)
+3. [docs/firmware_update_and_modes.md](docs/firmware_update_and_modes.md)
+4. [docs/macos_support.md](docs/macos_support.md)
+5. [docs/source_links.md](docs/source_links.md)

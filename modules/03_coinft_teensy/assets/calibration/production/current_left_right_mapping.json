@@ -1,7 +1,7 @@
 {
   "schema": "umift.coinft.left_right_mapping.v1",
   "created_date": "2026-07-09",
-  "source_folder": "<original-developer-machine>",
+  "source_folder": ".",
   "teensy_rule": {
     "left": "higher numbered active Teensy Serial/pins",
     "right": "lower numbered active Teensy Serial/pins",

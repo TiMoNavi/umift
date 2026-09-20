@@ -82,12 +82,12 @@ ios_app/UMIFTiPhoneCaptureCore/
 
 构建入口：
 
-- [ios_app/UMIFTiPhoneCaptureCore/README.md](/Users/550m/code/UMIFT-datacollect/modules/02_iphone_gripper/ios_app/UMIFTiPhoneCaptureCore/README.md)
-- [iPhone 到 Mac 实时主帧链路重写设计](/Users/550m/code/UMIFT-datacollect/docs/iphone_mac_realtime_stream_rewrite.md)
+- [ios_app/UMIFTiPhoneCaptureCore/README.md](ios_app/UMIFTiPhoneCaptureCore/README.md)
+- iPhone 到 Mac 实时主帧链路重写设计属于外部设计记录，未随本交付包提供。
 
 历史原型和验证 app 已归档到：
 
-- [ios_app/legacy/README.md](/Users/550m/code/UMIFT-datacollect/modules/02_iphone_gripper/ios_app/legacy/README.md)
+- [ios_app/legacy/README.md](ios_app/legacy/README.md)
 
 ## 模块职责
 

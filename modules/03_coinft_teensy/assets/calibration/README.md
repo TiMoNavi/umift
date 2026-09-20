@@ -49,7 +49,7 @@ source_README.md
 Raw HDF5 calibration captures and many intermediate plots were intentionally not copied here. They remain in:
 
 ```text
-/Users/550m/Downloads/05_testing_calibration_acceptance/coin-ft/device_models/
+historical calibration archive (not included)
 ```
 
 ## Not Current / Legacy

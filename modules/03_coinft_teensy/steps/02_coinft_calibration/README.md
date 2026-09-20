@@ -17,24 +17,24 @@
 
 ### 校准脚本
 
-- [code/coinft_data_collection.py](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/steps/02_coinft_calibration/code/coinft_data_collection.py)
-- [code/data_processor.py](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/steps/02_coinft_calibration/code/data_processor.py)
-- [code/coinft_MLP_train.py](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/steps/02_coinft_calibration/code/coinft_MLP_train.py)
-- [code/coinft_tuner.py](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/steps/02_coinft_calibration/code/coinft_tuner.py)
-- [code/h5py_visualizer.py](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/steps/02_coinft_calibration/code/h5py_visualizer.py)
+- [code/coinft_data_collection.py](code/coinft_data_collection.py)
+- [code/data_processor.py](code/data_processor.py)
+- [code/coinft_MLP_train.py](code/coinft_MLP_train.py)
+- [code/coinft_tuner.py](code/coinft_tuner.py)
+- [code/h5py_visualizer.py](code/h5py_visualizer.py)
 
 ### 现有 host 侧实现参考
 
-- [code/CoinFTBus.cpp](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/steps/02_coinft_calibration/code/CoinFTBus.cpp)
-- [code/CoinFTBus.h](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/steps/02_coinft_calibration/code/CoinFTBus.h)
-- [code/umift_ft_timestampped_UART.py](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/steps/02_coinft_calibration/code/umift_ft_timestampped_UART.py)
-- [code/wrench_calibration.py](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/steps/02_coinft_calibration/code/wrench_calibration.py)
+- [code/CoinFTBus.cpp](code/CoinFTBus.cpp)
+- [code/CoinFTBus.h](code/CoinFTBus.h)
+- [code/umift_ft_timestampped_UART.py](code/umift_ft_timestampped_UART.py)
+- [code/wrench_calibration.py](code/wrench_calibration.py)
 
 ### 当前生产模型 / norm 资产
 
 当前两只真实 CoinFT 的生产标定文件不再放在本步骤目录里，统一放在：
 
-- [../../assets/calibration/production](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/assets/calibration/production)
+- [../../assets/calibration/production](../../assets/calibration/production)
 
 当前映射：
 
@@ -131,9 +131,9 @@ DEDH 六维力传感器
 
 详细说明见：
 
-- [../../supporting_tools/dedh_reference_sensor](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/supporting_tools/dedh_reference_sensor)
+- [../../supporting_tools/dedh_reference_sensor](../../supporting_tools/dedh_reference_sensor)
 - 第一阶段可直接先跑：
-  - [../../supporting_tools/dedh_reference_sensor/scripts/dedh_modbus_reader.py](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/supporting_tools/dedh_reference_sensor/scripts/dedh_modbus_reader.py)
+  - [../../supporting_tools/dedh_reference_sensor/scripts/dedh_modbus_reader.py](../../supporting_tools/dedh_reference_sensor/scripts/dedh_modbus_reader.py)
 
 ### 3. 数据处理
 

@@ -459,8 +459,8 @@ bash modules/01_global_camera/run_capture_macos.sh list
 
 ```bash
 sudo env \
-  DYLD_LIBRARY_PATH=/Users/550m/code/UMIFT-datacollect/modules/01_global_camera/third_party/librealsense-install/lib \
-  PYTHONPATH=/Users/550m/code/UMIFT-datacollect/modules/01_global_camera/third_party/librealsense-install/python \
+  DYLD_LIBRARY_PATH=${UMIFT_ROOT}/modules/01_global_camera/third_party/librealsense-install/lib \
+  PYTHONPATH=${UMIFT_ROOT}/modules/01_global_camera/third_party/librealsense-install/python \
   python3 modules/01_global_camera/capture_d435i.py --list-devices
 ```
 
@@ -482,8 +482,8 @@ bash modules/01_global_camera/run_capture_macos.sh test 8 /tmp/d435_test
 
 ```bash
 sudo env \
-  DYLD_LIBRARY_PATH=/Users/550m/code/UMIFT-datacollect/modules/01_global_camera/third_party/librealsense-install/lib \
-  PYTHONPATH=/Users/550m/code/UMIFT-datacollect/modules/01_global_camera/third_party/librealsense-install/python \
+  DYLD_LIBRARY_PATH=${UMIFT_ROOT}/modules/01_global_camera/third_party/librealsense-install/lib \
+  PYTHONPATH=${UMIFT_ROOT}/modules/01_global_camera/third_party/librealsense-install/python \
   python3 modules/01_global_camera/capture_d435i.py \
     --output-dir /tmp/realsense_test \
     --serial 327122071246 \
@@ -549,7 +549,7 @@ bash modules/01_global_camera/run_capture_macos.sh warmup-sudo
 如果后续要配置 `sudoers` 白名单，建议白名单只放这一条固定入口：
 
 ```bash
-/Users/550m/code/UMIFT-datacollect/modules/01_global_camera/control_capture_macos.sh
+${UMIFT_ROOT}/modules/01_global_camera/control_capture_macos.sh
 ```
 
 而不是对白名单放开任意 `python3` 或任意 shell。
@@ -568,8 +568,8 @@ bash modules/01_global_camera/run_capture_macos.sh warmup-sudo
 
 ```bash
 sudo env \
-  DYLD_LIBRARY_PATH=/Users/550m/code/UMIFT-datacollect/modules/01_global_camera/third_party/librealsense-install/lib \
-  PYTHONPATH=/Users/550m/code/UMIFT-datacollect/modules/01_global_camera/third_party/librealsense-install/python \
+  DYLD_LIBRARY_PATH=${UMIFT_ROOT}/modules/01_global_camera/third_party/librealsense-install/lib \
+  PYTHONPATH=${UMIFT_ROOT}/modules/01_global_camera/third_party/librealsense-install/python \
   python3 modules/01_global_camera/capture_d435i.py \
     --run-dir runs/<run_id> \
     --serial 327122071246 \

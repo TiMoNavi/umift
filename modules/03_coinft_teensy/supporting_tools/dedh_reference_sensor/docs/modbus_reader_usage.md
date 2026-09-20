@@ -2,7 +2,7 @@
 
 脚本路径：
 
-- [../scripts/dedh_modbus_reader.py](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/supporting_tools/dedh_reference_sensor/scripts/dedh_modbus_reader.py)
+- [../scripts/dedh_modbus_reader.py](../scripts/dedh_modbus_reader.py)
 
 ## 当前脚本能做什么
 

@@ -154,7 +154,7 @@ CoinFT left/right -> Teensy 4.x -> USB serial -> Mac / Windows 笔记本
 Teensy 4.1，无应用固件，需要先刷写 CoinFT bridge 固件。
 ```
 
-已知官方协议：
+当前 Teensy 4.1 bridge 协议：
 
 ```text
 Host -> Teensy:
@@ -162,10 +162,17 @@ i = idle
 s = start streaming
 t = tare
 
-Teensy -> Host:
-0x00 0x00 + left 12 x uint16 + right 12 x uint16
-total: 50 bytes
+Teensy -> Host（两路在线或模拟模式）:
+0x00 0x00
++ sequence_id uint32 little-endian
++ teensy_time_us uint32 little-endian
++ left 24-byte frame body
++ right 24-byte frame body
+total: 58 bytes
 baud: 115200
+
+运行时会自动识别 0/1/2 路 CoinFT：0 路输出模拟 58-byte 双路包，1 路输出
+24-byte 单路调试 body，2 路输出上述 58-byte 双路包。生产采集使用 2 路协议。
 ```
 
 输出草案：

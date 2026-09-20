@@ -18,9 +18,9 @@
 
 ## 先看这些
 
-- [marker_strategy_from_umi.md](/Users/550m/code/UMIFT-datacollect/modules/02_iphone_gripper/03_gripper_marker_vision/marker_strategy_from_umi.md)
-- [marker_layout_for_current_mount.md](/Users/550m/code/UMIFT-datacollect/modules/02_iphone_gripper/03_gripper_marker_vision/marker_layout_for_current_mount.md)
-- [marker_print_and_mount_quickstart.md](/Users/550m/code/UMIFT-datacollect/modules/02_iphone_gripper/03_gripper_marker_vision/marker_print_and_mount_quickstart.md)
-- [printables/README.md](/Users/550m/code/UMIFT-datacollect/modules/02_iphone_gripper/03_gripper_marker_vision/printables/README.md)
-- [vision_strategy.md](/Users/550m/code/UMIFT-datacollect/modules/02_iphone_gripper/03_gripper_marker_vision/vision_strategy.md)
-- [vision_width_pipeline.md](/Users/550m/code/UMIFT-datacollect/modules/02_iphone_gripper/03_gripper_marker_vision/vision_width_pipeline.md)
+- marker_strategy_from_umi.md 属于历史规划记录，未随本包提供。
+- [marker_layout_for_current_mount.md](marker_layout_for_current_mount.md)
+- [marker_print_and_mount_quickstart.md](marker_print_and_mount_quickstart.md)
+- [printables/README.md](printables/README.md)
+- [vision_strategy.md](vision_strategy.md)
+- vision_width_pipeline.md 属于历史规划记录，未随本包提供。

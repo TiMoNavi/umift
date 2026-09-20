@@ -69,7 +69,7 @@ stream can include JPEG RGB payload bytes for the Mac receiver.
 To list local debug recordings from the Mac:
 
 ```sh
-DEVELOPER_DIR=/Users/550m/Downloads/Xcode.app/Contents/Developer \
+DEVELOPER_DIR=Xcode.app/Contents/Developer \
 xcrun devicectl device info files \
   --device 00008130-000E2DA10141001C \
   --domain-type appDataContainer \
@@ -80,13 +80,13 @@ xcrun devicectl device info files \
 To pull a recording:
 
 ```sh
-DEVELOPER_DIR=/Users/550m/Downloads/Xcode.app/Contents/Developer \
+DEVELOPER_DIR=Xcode.app/Contents/Developer \
 xcrun devicectl device copy from \
   --device 00008130-000E2DA10141001C \
   --domain-type appDataContainer \
   --domain-identifier com.local.umift.capturecore \
   --source Documents/Recordings/<file>.jsonl \
-  --destination /Users/550m/code/UMIFT-datacollect/modules/02_iphone_gripper/recordings/
+  --destination ${UMIFT_ROOT}/modules/02_iphone_gripper/recordings/
 ```
 
 ## USB/TCP Stream
@@ -114,7 +114,7 @@ Current stream behavior:
 Primary Mac receiver:
 
 ```sh
-python3 /Users/550m/code/UMIFT-datacollect/modules/04_laptop_alignment_export/iphone_stream_receiver.py
+python3 ${UMIFT_ROOT}/modules/04_laptop_alignment_export/iphone_stream_receiver.py
 ```
 
 Optional raw TCP test if an external port forwarder is used:
@@ -126,7 +126,7 @@ nc 127.0.0.1 17381
 Offline receiver validation using a pulled local JSONL:
 
 ```sh
-python3 /Users/550m/code/UMIFT-datacollect/modules/04_laptop_alignment_export/iphone_stream_receiver.py \
+python3 ${UMIFT_ROOT}/modules/04_laptop_alignment_export/iphone_stream_receiver.py \
   --input-jsonl /path/to/capture.jsonl \
   --session-id offline_check
 ```
@@ -134,7 +134,7 @@ python3 /Users/550m/code/UMIFT-datacollect/modules/04_laptop_alignment_export/ip
 Default output path:
 
 ```text
-/Users/550m/code/UMIFT-datacollect/modules/04_laptop_alignment_export/captures/iphone_stream/<session_id>/
+${UMIFT_ROOT}/modules/04_laptop_alignment_export/captures/iphone_stream/<session_id>/
 ```
 
 Current Mac note: Xcode `devicectl` can install, launch, and copy app files, but

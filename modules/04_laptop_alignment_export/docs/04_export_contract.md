@@ -2,7 +2,7 @@
 
 > 当前导出契约以本文为准。历史模块拆分讨论已从交付包中移除。
 
-本文档替代之前围绕 ForceFlow 扁平 Zarr 的导出方案。当前主目标是按 `/Users/550m/code/UMI-FT` 原项目逻辑输出 UMI-FT replay buffer Zarr。
+本文档替代之前围绕 ForceFlow 扁平 Zarr 的导出方案。当前主目标是按 `external UMI-FT source tree` 原项目逻辑输出 UMI-FT replay buffer Zarr。
 
 核心结论：
 
@@ -719,7 +719,7 @@ UMIFT_EXPORT_MANIFEST.json
 
 第二阶段完成标准：
 
-- 能用 `/Users/550m/code/UMI-FT` 的 `UmiFTDataset` 读取一个 batch。
+- 能用 `external UMI-FT source tree` 的 `UmiFTDataset` 读取一个 batch。
 - 若训练配置需要 `ts_pose_virtual_target_0` 和 `stiffness_0`，已由后处理生成或 manifest 明确为占位。
 
 ## 12. UMI-FT 占位契约与采集端改造

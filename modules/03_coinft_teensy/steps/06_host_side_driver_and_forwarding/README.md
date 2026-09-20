@@ -11,21 +11,21 @@ Teensy 已经在出 raw 数据
 
 ### CoinFT host 驱动
 
-- [code/coinft_driver/CoinFTBus.cpp](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/steps/06_host_side_driver_and_forwarding/code/coinft_driver/CoinFTBus.cpp)
-- [code/coinft_driver/CoinFTBus.h](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/steps/06_host_side_driver_and_forwarding/code/coinft_driver/CoinFTBus.h)
-- [code/coinft_driver/coin_ft.cpp](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/steps/06_host_side_driver_and_forwarding/code/coinft_driver/coin_ft.cpp)
-- [code/coinft_driver/coin_ft.h](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/steps/06_host_side_driver_and_forwarding/code/coinft_driver/coin_ft.h)
+- [code/coinft_driver/CoinFTBus.cpp](code/coinft_driver/CoinFTBus.cpp)
+- [code/coinft_driver/CoinFTBus.h](code/coinft_driver/CoinFTBus.h)
+- [code/coinft_driver/coin_ft.cpp](code/coinft_driver/coin_ft.cpp)
+- [code/coinft_driver/coin_ft.h](code/coinft_driver/coin_ft.h)
 
 ### ManipServer 侧入口
 
-- [code/manip_server/manip_server.cc](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/steps/06_host_side_driver_and_forwarding/code/manip_server/manip_server.cc)
-- [code/manip_server/manip_server_loops.cc](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/steps/06_host_side_driver_and_forwarding/code/manip_server/manip_server_loops.cc)
-- [code/manip_server/manip_server_pybind.cc](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/steps/06_host_side_driver_and_forwarding/code/manip_server/manip_server_pybind.cc)
+- [code/manip_server/manip_server.cc](code/manip_server/manip_server.cc)
+- [code/manip_server/manip_server_loops.cc](code/manip_server/manip_server_loops.cc)
+- [code/manip_server/manip_server_pybind.cc](code/manip_server/manip_server_pybind.cc)
 
 ### 配置
 
-- [code/configs/right_arm_coinft.yaml](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/steps/06_host_side_driver_and_forwarding/code/configs/right_arm_coinft.yaml)
-- [code/configs/right_arm_coinft_data_collection.yaml](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/steps/06_host_side_driver_and_forwarding/code/configs/right_arm_coinft_data_collection.yaml)
+- [code/configs/right_arm_coinft.yaml](code/configs/right_arm_coinft.yaml)
+- [code/configs/right_arm_coinft_data_collection.yaml](code/configs/right_arm_coinft_data_collection.yaml)
 
 ## 这层负责什么
 
@@ -49,6 +49,10 @@ Teensy 已经在出 raw 数据
 - 左右 norm 文件路径
 - 左右 `PoseSensorTool`
 - `WrenchSafety`
+
+示例 C++ 程序中的模型路径是相对于交付包根目录的
+`modules/03_coinft_teensy/assets/...`。运行这些示例前先执行
+`cd "$UMIFT_ROOT"`，这样解压到任意位置都不会回到原开发机路径。
 
 ## 和本项目的关系
 

@@ -282,7 +282,7 @@ bash entrypoints/install_sudoers_macos.sh --help
 - GUI 的 `/state` 能汇总 `capture_summary`，三路状态可由 GUI 读取。
 - 本轮 live smoke 验证 `capture_summary.ready=true`，iPhone / D435 / CoinFT 三路均 `ok=true`。
 - `umift-replay-buffer-zarr` 已在 `runs/run_20260626_124555` 上生成 `acp_replay_buffer_gripper.zarr`：416 个 RGB/pose/gripper 样本、2773 个双路 CoinFT wrench 样本、416 个 D435 global RGB/depth 样本。
-- 生成的 UMI-FT Zarr 已通过 `/Users/550m/code/UMI-FT/PyriteML/diffusion_policy/common/replay_buffer.py::ReplayBuffer.copy_from_store` 读取检查。
+- 生成的 UMI-FT Zarr 已通过 `external UMI-FT source tree/PyriteML/diffusion_policy/common/replay_buffer.py::ReplayBuffer.copy_from_store` 读取检查。
 
 重构后的基本检查：
 

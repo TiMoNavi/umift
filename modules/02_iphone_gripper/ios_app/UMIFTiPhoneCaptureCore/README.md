@@ -45,7 +45,7 @@ modules/04_laptop_alignment_export/
 ## Build
 
 ```sh
-DEVELOPER_DIR=/Users/550m/Downloads/Xcode.app/Contents/Developer \
+DEVELOPER_DIR=Xcode.app/Contents/Developer \
 xcodebuild \
   -project UMIFTiPhoneCaptureCore.xcodeproj \
   -scheme UMIFTiPhoneCaptureCore \

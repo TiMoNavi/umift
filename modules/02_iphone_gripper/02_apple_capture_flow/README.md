@@ -9,10 +9,10 @@
 
 ## 推荐先看
 
-- [capture_design.md](/Users/550m/code/UMIFT-datacollect/modules/02_iphone_gripper/02_apple_capture_flow/capture_design.md)
-- [ios_app/UMIFTiPhoneCaptureCore/README.md](/Users/550m/code/UMIFT-datacollect/modules/02_iphone_gripper/ios_app/UMIFTiPhoneCaptureCore/README.md)
-- [App/ARCapture/ARCaptureModel.swift](/Users/550m/code/UMIFT-datacollect/modules/02_iphone_gripper/ios_app/UMIFTiPhoneCaptureCore/App/ARCapture/ARCaptureModel.swift)
-- [App/UI/CaptureDashboardView.swift](/Users/550m/code/UMIFT-datacollect/modules/02_iphone_gripper/ios_app/UMIFTiPhoneCaptureCore/App/UI/CaptureDashboardView.swift)
+- 当前采集流程以本 README 和 `ios_app/UMIFTiPhoneCaptureCore/README.md` 为准；独立 `capture_design.md` 未随本包提供。
+- [ios_app/UMIFTiPhoneCaptureCore/README.md](../ios_app/UMIFTiPhoneCaptureCore/README.md)
+- [App/ARCapture/ARCaptureModel.swift](../ios_app/UMIFTiPhoneCaptureCore/App/ARCapture/ARCaptureModel.swift)
+- [App/UI/CaptureDashboardView.swift](../ios_app/UMIFTiPhoneCaptureCore/App/UI/CaptureDashboardView.swift)
 
 ## 当前流程摘要
 

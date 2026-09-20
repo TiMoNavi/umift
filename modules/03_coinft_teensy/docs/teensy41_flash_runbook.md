@@ -5,7 +5,7 @@
 当前工程：
 
 ```text
-<PATH_TO_DELIVERABLES>/modules/03_coinft_teensy/steps/04_teensy_bridge_firmware/firmware
+$UMIFT_ROOT/modules/03_coinft_teensy/steps/04_teensy_bridge_firmware/firmware
 ```
 
 ## 1. 当前固件职责
@@ -42,7 +42,7 @@ right = lower numbered active Teensy Serial/pins  = coinft_2606602_0012
 ## 2. 编译
 
 ```bash
-cd <PATH_TO_DELIVERABLES>/modules/03_coinft_teensy/steps/04_teensy_bridge_firmware/firmware
+cd $UMIFT_ROOT/modules/03_coinft_teensy/steps/04_teensy_bridge_firmware/firmware
 pio run
 ```
 
@@ -68,7 +68,7 @@ ls /dev/tty.usbmodem*
 没有接 CoinFT 时，也可以先验证模拟双路包：
 
 ```bash
-python <PATH_TO_DELIVERABLES>/modules/03_coinft_teensy/steps/04_teensy_bridge_firmware/tools/coinft_teensy_smoke_test.py \
+python $UMIFT_ROOT/modules/03_coinft_teensy/steps/04_teensy_bridge_firmware/tools/coinft_teensy_smoke_test.py \
   --port /dev/cu.usbmodemXXXX \
   --simulate
 ```
@@ -89,7 +89,7 @@ right=<lower numbered active Serial>
 再跑普通 stream smoke test：
 
 ```bash
-python <PATH_TO_DELIVERABLES>/modules/03_coinft_teensy/steps/04_teensy_bridge_firmware/tools/coinft_teensy_smoke_test.py \
+python $UMIFT_ROOT/modules/03_coinft_teensy/steps/04_teensy_bridge_firmware/tools/coinft_teensy_smoke_test.py \
   --port /dev/cu.usbmodemXXXX
 ```
 

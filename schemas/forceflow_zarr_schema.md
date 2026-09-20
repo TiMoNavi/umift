@@ -119,7 +119,7 @@ export/<task>.zarr/<task>_normalizer.json
 第一版导出后必须通过：
 
 ```bash
-python /Users/550m/code/ForceFlow/scripts/validate.py <export/<task>.zarr>
+python ForceFlow/scripts/validate.py (external tool) <export/<task>.zarr>
 ```
 
 如果 validator CLI 参数不同，以该脚本实际入口为准。

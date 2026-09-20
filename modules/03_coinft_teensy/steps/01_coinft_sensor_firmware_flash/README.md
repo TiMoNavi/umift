@@ -6,9 +6,9 @@
 
 ### 资产
 
-- [assets/CoinFT_V2_firmware.hex](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/steps/01_coinft_sensor_firmware_flash/assets/CoinFT_V2_firmware.hex)
-- [assets/CFT_V2_BOM_PCBA.xlsx](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/steps/01_coinft_sensor_firmware_flash/assets/CFT_V2_BOM_PCBA.xlsx)
-- [assets/CFT_V2_CPL_revised.xlsx](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/steps/01_coinft_sensor_firmware_flash/assets/CFT_V2_CPL_revised.xlsx)
+- [assets/CoinFT_V2_firmware.hex](assets/CoinFT_V2_firmware.hex)
+- [assets/CFT_V2_BOM_PCBA.xlsx](assets/CFT_V2_BOM_PCBA.xlsx)
+- [assets/CFT_V2_CPL_revised.xlsx](assets/CFT_V2_CPL_revised.xlsx)
 
 ## 当前已知
 

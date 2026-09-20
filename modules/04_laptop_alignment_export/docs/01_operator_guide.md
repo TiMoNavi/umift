@@ -11,18 +11,18 @@
 本指南使用的项目根目录是：
 
 ```text
-/Users/550m/code/UMIFT-datacollect
+${UMIFT_ROOT}
 ```
 
 如果项目被放在其他位置，下面所有命令中的这一前缀都要一起替换。不要只复制项目的某个子目录，D435 运行时还会使用 `modules/01_global_camera/` 中的 librealsense 运行库。
 
 ### 0.1 需要准备的软硬件
 
-- macOS 电脑，并安装完整 Xcode。当前已验证的 Xcode 位置是 `/Users/550m/Downloads/Xcode.app`。
+- macOS 电脑，并安装完整 Xcode。当前已验证的 Xcode 位置是 `Xcode.app`。
 - iOS 17.0 或更高版本的 iPhone，开启开发者模式，通过 USB 连接、解锁并信任这台 Mac。
 - Intel RealSense D435/D435i。
 - 已刷写 CoinFT bridge 固件的 Teensy 和两路 CoinFT。
-- 已配置的 Python 3.9 Conda 环境。当前已验证的解释器是 `/Users/550m/miniforge3/envs/umift_datacollection/bin/python`。
+- 已配置的 Python 3.9 Conda 环境。当前已验证的解释器是 `python3`。
 
 > 当前仓库还没有提交 `environment.yml` 或 `requirements.txt`。因此，对一台全新 Mac，Python 环境还不是可从仓库一键重建的部署项。本机正式采集应使用上面已验证的解释器，不要临时换成系统 `python3`。
 
@@ -74,14 +74,14 @@ runs/run_<time>_<task>/
 打开 Mac 的“终端”，执行：
 
 ```bash
-cd /Users/550m/code/UMIFT-datacollect
+cd ${UMIFT_ROOT}
 
 test -f modules/04_laptop_alignment_export/entrypoints/receiver_web_gui.py \
   && echo "project files: ok"
 
-/Users/550m/miniforge3/envs/umift_datacollection/bin/python --version
+python3 --version
 
-/Users/550m/miniforge3/envs/umift_datacollection/bin/python -c \
+python3 -c \
   'import av, cv2, numpy, serial, zarr; print("python dependencies: ok")'
 ```
 
@@ -92,7 +92,7 @@ test -f modules/04_laptop_alignment_export/entrypoints/receiver_web_gui.py \
 先检查 librealsense 运行库是否已经存在：
 
 ```bash
-cd /Users/550m/code/UMIFT-datacollect
+cd ${UMIFT_ROOT}
 
 test -d modules/01_global_camera/third_party/librealsense-install \
   && echo "librealsense runtime: ok"
@@ -101,14 +101,14 @@ test -d modules/01_global_camera/third_party/librealsense-install \
 如果没有输出 `librealsense runtime: ok`，需要联网构建一次：
 
 ```bash
-cd /Users/550m/code/UMIFT-datacollect
+cd ${UMIFT_ROOT}
 bash modules/01_global_camera/install_realsense_macos.sh
 ```
 
 该脚本需要 `git`、`cmake` 和 Xcode Command Line Tools，并会构建 librealsense。完成后安装 D435 固定控制入口和最小化 sudoers 规则：
 
 ```bash
-cd /Users/550m/code/UMIFT-datacollect
+cd ${UMIFT_ROOT}
 bash modules/04_laptop_alignment_export/entrypoints/install_sudoers_macos.sh
 ```
 
@@ -122,7 +122,7 @@ bash modules/04_laptop_alignment_export/entrypoints/install_sudoers_macos.sh
 它只允许主程序无密码调用固定的 D435 控制入口，不是通用免密 sudo。用下面的命令验证相机：
 
 ```bash
-cd /Users/550m/code/UMIFT-datacollect
+cd ${UMIFT_ROOT}
 bash modules/04_laptop_alignment_export/umift_laptop_alignment/capture/receivers/d435/run_d435_macos.sh list
 ```
 
@@ -147,9 +147,9 @@ done'
 先连接、解锁和信任 iPhone，然后查询 `xcodebuild` 可使用的设备 UDID：
 
 ```bash
-cd /Users/550m/code/UMIFT-datacollect/modules/02_iphone_gripper/ios_app/UMIFTiPhoneCaptureCore
+cd ${UMIFT_ROOT}/modules/02_iphone_gripper/ios_app/UMIFTiPhoneCaptureCore
 
-DEVELOPER_DIR=/Users/550m/Downloads/Xcode.app/Contents/Developer \
+DEVELOPER_DIR=Xcode.app/Contents/Developer \
   xcodebuild \
   -project UMIFTiPhoneCaptureCore.xcodeproj \
   -scheme UMIFTiPhoneCaptureCore \
@@ -159,9 +159,9 @@ DEVELOPER_DIR=/Users/550m/Downloads/Xcode.app/Contents/Developer \
 在 `Available destinations` 中找到目标实体 iPhone，把它的 `id` 填到下面的 `<DEVICE_UDID>`。不要选择 `Any iOS Device` 或 iOS Simulator：
 
 ```bash
-cd /Users/550m/code/UMIFT-datacollect/modules/02_iphone_gripper/ios_app/UMIFTiPhoneCaptureCore
+cd ${UMIFT_ROOT}/modules/02_iphone_gripper/ios_app/UMIFTiPhoneCaptureCore
 
-export DEVELOPER_DIR=/Users/550m/Downloads/Xcode.app/Contents/Developer
+export DEVELOPER_DIR=Xcode.app/Contents/Developer
 export DEVICE_UDID="<DEVICE_UDID>"
 
 xcodebuild \
@@ -232,9 +232,9 @@ xcrun devicectl device process launch \
 打开 Mac 的“终端”，运行：
 
 ```bash
-cd /Users/550m/code/UMIFT-datacollect/modules/04_laptop_alignment_export
+cd ${UMIFT_ROOT}/modules/04_laptop_alignment_export
 
-/Users/550m/miniforge3/envs/umift_datacollection/bin/python \
+python3 \
   entrypoints/receiver_web_gui.py \
   --host 127.0.0.1 \
   --port 8767 \

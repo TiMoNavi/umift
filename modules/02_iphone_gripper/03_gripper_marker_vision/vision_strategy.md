@@ -179,4 +179,4 @@ frame_index,iphone_pose_time_s,gripper_width_m,confidence,status
 
 继续看：
 
-- [vision_width_pipeline.md](/Users/550m/code/UMIFT-datacollect/modules/02_iphone_gripper/03_gripper_marker_vision/vision_width_pipeline.md)
+- 独立的 vision_width_pipeline.md 未随本包提供；当前方案以本文件为准。

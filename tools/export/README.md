@@ -11,7 +11,7 @@ export/<task>.zarr/
 - `docs/training_zarr_alignment.md`
 - `docs/training_format_implementation.md`
 - `schemas/forceflow_zarr_schema.md`
-- `/Users/550m/code/ForceFlow/scripts/validate.py`
+- `ForceFlow/scripts/validate.py (external tool)`
 
 ## 输入
 

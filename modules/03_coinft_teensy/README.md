@@ -31,7 +31,7 @@
 
 路径：
 
-- [steps/01_coinft_sensor_firmware_flash](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/steps/01_coinft_sensor_firmware_flash)
+- [steps/01_coinft_sensor_firmware_flash](steps/01_coinft_sensor_firmware_flash)
 
 处理什么：
 
@@ -43,7 +43,7 @@
 
 路径：
 
-- [steps/02_coinft_calibration](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/steps/02_coinft_calibration)
+- [steps/02_coinft_calibration](steps/02_coinft_calibration)
 
 处理什么：
 
@@ -55,13 +55,13 @@
 
 补充参考资料：
 
-- [supporting_tools/dedh_reference_sensor](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/supporting_tools/dedh_reference_sensor)
+- [supporting_tools/dedh_reference_sensor](supporting_tools/dedh_reference_sensor)
 
 ### Step 03. Teensy 基本信息
 
 路径：
 
-- [steps/03_teensy_basics](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/steps/03_teensy_basics)
+- [steps/03_teensy_basics](steps/03_teensy_basics)
 
 处理什么：
 
@@ -74,7 +74,7 @@
 
 路径：
 
-- [steps/04_teensy_bridge_firmware](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/steps/04_teensy_bridge_firmware)
+- [steps/04_teensy_bridge_firmware](steps/04_teensy_bridge_firmware)
 
 处理什么：
 
@@ -87,7 +87,7 @@
 
 路径：
 
-- [steps/05_first_coinft_capture](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/steps/05_first_coinft_capture)
+- [steps/05_first_coinft_capture](steps/05_first_coinft_capture)
 
 处理什么：
 
@@ -99,7 +99,7 @@
 
 路径：
 
-- [steps/06_host_side_driver_and_forwarding](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/steps/06_host_side_driver_and_forwarding)
+- [steps/06_host_side_driver_and_forwarding](steps/06_host_side_driver_and_forwarding)
 
 处理什么：
 
@@ -133,11 +133,11 @@
 1. Step 02
 2. Step 05
 3. Step 06
-4. [docs/coinft_to_module04_integration.md](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/docs/coinft_to_module04_integration.md)
+4. [docs/coinft_to_module04_integration.md](docs/coinft_to_module04_integration.md)
 
 04 主链路当前推荐配置：
 
-- [configs/coinft_04_laptop_calibrated.json](/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/configs/coinft_04_laptop_calibrated.json)
+- [configs/coinft_04_laptop_calibrated.json](configs/coinft_04_laptop_calibrated.json)
 
 ## 当前仍然缺什么
 

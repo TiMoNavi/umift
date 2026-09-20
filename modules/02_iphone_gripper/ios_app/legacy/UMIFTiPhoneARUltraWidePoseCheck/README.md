@@ -46,9 +46,7 @@ private ARFrame side stream:
 ../UMIFTiPhoneDualCapture/
 ```
 
-迁移方案：
-
-- [../UMIFTiPhoneDualCapture/docs/arkit_private_ultrawide_migration_plan.md](/Users/550m/code/UMIFT-datacollect/modules/02_iphone_gripper/ios_app/UMIFTiPhoneDualCapture/docs/arkit_private_ultrawide_migration_plan.md)
+迁移方案文档未随本交付包提供；该目录仅保留验证结论，不是最终采集入口。
 
 ## 注意
 

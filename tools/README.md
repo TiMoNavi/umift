@@ -8,7 +8,7 @@
 python3 tools/validate_deliverable_paths.py
 ```
 
-脚本会检查 Markdown 链接、JSON 模型/固件路径、包外绝对路径、占位符，以及 `.pio`、`.DS_Store`、`.bak` 等生成或备份文件。
+脚本会检查 Markdown 链接、JSON/YAML 模型/固件路径、包外绝对路径、占位符，以及 `.pio`、`.DS_Store`、`.bak` 等生成或备份文件。为避免遍历采集数据，脚本会跳过 `runs/`；第三方源码树也不会作为交付源码路径检查。
 
 这个目录放的是实际脚本实现。
 

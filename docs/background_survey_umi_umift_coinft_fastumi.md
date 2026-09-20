@@ -865,17 +865,12 @@ Laptop:
 
 - [系统架构说明](./system_architecture.md)
 - [采集流程](./collection_workflow.md)
-- [UMI-FT 项目实现与数据格式](../show/PHASE1_PROJECT_AND_DATA.md)
+- UMI-FT 项目实现与数据格式：原始 `show/` 演示材料未包含在本源码交付包中。
 - [UMI-FT 数据契约](../modules/04_laptop_alignment_export/docs/03_data_contract.md)
 
 ### 本地 UMI-FT 代码核对点
 
-- [CoinFT 串口采集、tare、归一化与 ONNX 推理](/Users/550m/code/UMI-FT/UMIFT_Data/wired_collection/Python/umift_ft_timestampped_UART.py)
-- [CoinFT 到 TCP 的 wrench 变换与夹爪宽度插值](/Users/550m/code/UMI-FT/UMIFT_Data/umift/processing/zarr_dataset.py)
-- [相对 pose、相对 wrench 与 grasp force 的训练样本变换](/Users/550m/code/UMI-FT/PyriteConfig/tasks/umift/umift_type_conversions.py)
-- [基于力和刚度生成 virtual target 的后处理](/Users/550m/code/UMI-FT/PyriteUtility/PyriteUtility/data_pipeline/postprocessing_add_virtual_target_label_umift.py)
-- [virtual target 的 `force / stiffness` 位移模型](/Users/550m/code/UMI-FT/PyriteUtility/PyriteUtility/planning_control/compliance_helpers.py)
-- [按 timestamp 组织 observation/action horizon 的采样器](/Users/550m/code/UMI-FT/PyriteML/diffusion_policy/common/sampler_umift.py)
+- 以上 UMI-FT 源码路径属于外部历史核对资料，不是本交付包的运行依赖；当前可运行实现见 `modules/04_laptop_alignment_export/`。
 
 ## 12. 资料使用边界
 

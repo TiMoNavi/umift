@@ -5,7 +5,7 @@
   "teensy_connection": "lower numbered active Serial/pins",
   "calibration_date": "2026-07-03",
   "archived_at": "2026-07-09",
-  "source_folder": "<original-developer-machine>",
+  "source_folder": ".",
   "runtime_files": {
     "onnx": "coinft_2606602_0012_MLP.onnx",
     "onnx_external_data": "CFT24_MLP.onnx.data",

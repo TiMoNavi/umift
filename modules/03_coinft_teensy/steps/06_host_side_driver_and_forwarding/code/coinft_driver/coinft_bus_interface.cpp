@@ -15,19 +15,19 @@ constexpr const char* kPort = "/dev/tty.usbmodem101";
 constexpr unsigned int kBaudRate = 115200;
 
 constexpr const char* kLeftModel =
-    "/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/assets/"
+    "modules/03_coinft_teensy/assets/"
     "calibration/production/coinft_2606602_0019/"
     "coinft_2606602_0019_MLP.onnx";
 constexpr const char* kLeftNorm =
-    "/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/assets/"
+    "modules/03_coinft_teensy/assets/"
     "calibration/production/coinft_2606602_0019/"
     "coinft_2606602_0019_norm.json";
 constexpr const char* kRightModel =
-    "/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/assets/"
+    "modules/03_coinft_teensy/assets/"
     "calibration/production/coinft_2606602_0012/"
     "coinft_2606602_0012_MLP.onnx";
 constexpr const char* kRightNorm =
-    "/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/assets/"
+    "modules/03_coinft_teensy/assets/"
     "calibration/production/coinft_2606602_0012/"
     "coinft_2606602_0012_norm.json";
 
