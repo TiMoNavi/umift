@@ -57,20 +57,20 @@ int main(int argc, char* argv[]) {
     config.baud_rate = 115200;
     config.left_calibration_file =
         "/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/assets/"
-        "calibration/production/coinft_2606602_0008/"
-        "coinft_2606602_0008_MLP.onnx";
-    config.right_calibration_file =
-        "/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/assets/"
         "calibration/production/coinft_2606602_0019/"
         "coinft_2606602_0019_MLP.onnx";
-    config.left_normalization_file =
+    config.right_calibration_file =
         "/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/assets/"
-        "calibration/production/coinft_2606602_0008/"
-        "coinft_2606602_0008_norm.json";
-    config.right_normalization_file =
+        "calibration/production/coinft_2606602_0012/"
+        "coinft_2606602_0012_MLP.onnx";
+    config.left_normalization_file =
         "/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/assets/"
         "calibration/production/coinft_2606602_0019/"
         "coinft_2606602_0019_norm.json";
+    config.right_normalization_file =
+        "/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/assets/"
+        "calibration/production/coinft_2606602_0012/"
+        "coinft_2606602_0012_norm.json";
     config.WrenchSafety << 20.0, 20.0, 50.0, 1.0, 1.0, 1.0;
     config.PoseSensorToolLeft << 0.166, -0.081, 0.08, 0.707107, 0.0,
         -0.707107, 0.0;

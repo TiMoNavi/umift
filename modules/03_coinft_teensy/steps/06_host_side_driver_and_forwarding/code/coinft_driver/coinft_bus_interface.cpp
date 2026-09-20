@@ -16,26 +16,26 @@ constexpr unsigned int kBaudRate = 115200;
 
 constexpr const char* kLeftModel =
     "/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/assets/"
-    "calibration/production/coinft_2606602_0008/"
-    "coinft_2606602_0008_MLP.onnx";
-constexpr const char* kLeftNorm =
-    "/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/assets/"
-    "calibration/production/coinft_2606602_0008/"
-    "coinft_2606602_0008_norm.json";
-constexpr const char* kRightModel =
-    "/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/assets/"
     "calibration/production/coinft_2606602_0019/"
     "coinft_2606602_0019_MLP.onnx";
-constexpr const char* kRightNorm =
+constexpr const char* kLeftNorm =
     "/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/assets/"
     "calibration/production/coinft_2606602_0019/"
     "coinft_2606602_0019_norm.json";
+constexpr const char* kRightModel =
+    "/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/assets/"
+    "calibration/production/coinft_2606602_0012/"
+    "coinft_2606602_0012_MLP.onnx";
+constexpr const char* kRightNorm =
+    "/Users/550m/code/UMIFT-datacollect/modules/03_coinft_teensy/assets/"
+    "calibration/production/coinft_2606602_0012/"
+    "coinft_2606602_0012_norm.json";
 
 }  // namespace
 
 int main() {
   // left  = higher numbered active Teensy Serial/pins = coinft_2606602_0019
-  // right = lower numbered active Teensy Serial/pins  = coinft_2606602_0008
+  // right = lower numbered active Teensy Serial/pins  = coinft_2606602_0012
   const std::vector<std::tuple<int, std::string, std::string>> sensorConfigs = {
       {CoinFTBus::LEFT, kLeftModel, kLeftNorm},
       {CoinFTBus::RIGHT, kRightModel, kRightNorm},
