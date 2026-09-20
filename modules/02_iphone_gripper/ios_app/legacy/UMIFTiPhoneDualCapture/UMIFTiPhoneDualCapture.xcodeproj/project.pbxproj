@@ -1,0 +1,413 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 60;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		100000000000000000000001 /* UMIFTiPhoneDualCaptureApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000001 /* UMIFTiPhoneDualCaptureApp.swift */; };
+		100000000000000000000002 /* CaptureAppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000002 /* CaptureAppState.swift */; };
+		100000000000000000000003 /* CaptureDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000003 /* CaptureDashboardView.swift */; };
+		100000000000000000000004 /* CaptureUIComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000004 /* CaptureUIComponents.swift */; };
+		100000000000000000000005 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000005 /* Assets.xcassets */; };
+		100000000000000000000006 /* DualCameraCaptureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000006 /* DualCameraCaptureManager.swift */; };
+		100000000000000000000007 /* DualCameraPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000007 /* DualCameraPreviewView.swift */; };
+		100000000000000000000008 /* GripperVisionModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000008 /* GripperVisionModels.swift */; };
+		100000000000000000000009 /* GripperVisionProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000009 /* GripperVisionProcessor.swift */; };
+		10000000000000000000000A /* GripperMarkerOverlayLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20000000000000000000000A /* GripperMarkerOverlayLayer.swift */; };
+		10000000000000000000000B /* GripperArucoBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 20000000000000000000000C /* GripperArucoBridge.mm */; };
+		10000000000000000000000C /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20000000000000000000000E /* opencv2.framework */; };
+		10000000000000000000000D /* DeviceMotionPoseProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20000000000000000000000F /* DeviceMotionPoseProvider.swift */; };
+		10000000000000000000000E /* WorldCalibrationARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000010 /* WorldCalibrationARView.swift */; };
+		10000000000000000000000F /* ARKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 200000000000000000000011 /* ARKit.framework */; };
+		100000000000000000000010 /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 200000000000000000000012 /* SceneKit.framework */; };
+		100000000000000000000011 /* ARCaptureModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000013 /* ARCaptureModel.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		200000000000000000000000 /* UMIFTiPhoneDualCapture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UMIFTiPhoneDualCapture.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		200000000000000000000001 /* UMIFTiPhoneDualCaptureApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UMIFTiPhoneDualCaptureApp.swift; sourceTree = "<group>"; };
+		200000000000000000000002 /* CaptureAppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureAppState.swift; sourceTree = "<group>"; };
+		200000000000000000000003 /* CaptureDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureDashboardView.swift; sourceTree = "<group>"; };
+		200000000000000000000004 /* CaptureUIComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureUIComponents.swift; sourceTree = "<group>"; };
+		200000000000000000000005 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		200000000000000000000006 /* DualCameraCaptureManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DualCameraCaptureManager.swift; sourceTree = "<group>"; };
+		200000000000000000000007 /* DualCameraPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DualCameraPreviewView.swift; sourceTree = "<group>"; };
+		200000000000000000000008 /* GripperVisionModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GripperVisionModels.swift; sourceTree = "<group>"; };
+		200000000000000000000009 /* GripperVisionProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GripperVisionProcessor.swift; sourceTree = "<group>"; };
+		20000000000000000000000A /* GripperMarkerOverlayLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GripperMarkerOverlayLayer.swift; sourceTree = "<group>"; };
+		20000000000000000000000B /* GripperArucoBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GripperArucoBridge.h; sourceTree = "<group>"; };
+		20000000000000000000000C /* GripperArucoBridge.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = GripperArucoBridge.mm; sourceTree = "<group>"; };
+		20000000000000000000000D /* UMIFTiPhoneDualCapture-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UMIFTiPhoneDualCapture-Bridging-Header.h"; sourceTree = "<group>"; };
+		20000000000000000000000E /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = ../vendor/opencv2.framework; sourceTree = SOURCE_ROOT; };
+		20000000000000000000000F /* DeviceMotionPoseProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceMotionPoseProvider.swift; sourceTree = "<group>"; };
+		200000000000000000000010 /* WorldCalibrationARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldCalibrationARView.swift; sourceTree = "<group>"; };
+		200000000000000000000011 /* ARKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ARKit.framework; path = System/Library/Frameworks/ARKit.framework; sourceTree = SDKROOT; };
+		200000000000000000000012 /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
+		200000000000000000000013 /* ARCaptureModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARCaptureModel.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		300000000000000000000000 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				10000000000000000000000C /* opencv2.framework in Frameworks */,
+				10000000000000000000000F /* ARKit.framework in Frameworks */,
+				100000000000000000000010 /* SceneKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		400000000000000000000000 = {
+			isa = PBXGroup;
+			children = (
+				400000000000000000000001 /* App */,
+				400000000000000000000005 /* Frameworks */,
+				400000000000000000000002 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		400000000000000000000001 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				200000000000000000000001 /* UMIFTiPhoneDualCaptureApp.swift */,
+				200000000000000000000002 /* CaptureAppState.swift */,
+				200000000000000000000006 /* DualCameraCaptureManager.swift */,
+				200000000000000000000007 /* DualCameraPreviewView.swift */,
+				400000000000000000000007 /* ARCapture */,
+				400000000000000000000006 /* Calibration */,
+				400000000000000000000003 /* GripperVision */,
+				200000000000000000000003 /* CaptureDashboardView.swift */,
+				200000000000000000000004 /* CaptureUIComponents.swift */,
+				20000000000000000000000D /* UMIFTiPhoneDualCapture-Bridging-Header.h */,
+				200000000000000000000005 /* Assets.xcassets */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		400000000000000000000003 /* GripperVision */ = {
+			isa = PBXGroup;
+			children = (
+				200000000000000000000008 /* GripperVisionModels.swift */,
+				200000000000000000000009 /* GripperVisionProcessor.swift */,
+				20000000000000000000000A /* GripperMarkerOverlayLayer.swift */,
+				400000000000000000000004 /* OpenCVBridge */,
+			);
+			path = GripperVision;
+			sourceTree = "<group>";
+		};
+		400000000000000000000004 /* OpenCVBridge */ = {
+			isa = PBXGroup;
+			children = (
+				20000000000000000000000B /* GripperArucoBridge.h */,
+				20000000000000000000000C /* GripperArucoBridge.mm */,
+			);
+			path = OpenCVBridge;
+			sourceTree = "<group>";
+		};
+		400000000000000000000006 /* Calibration */ = {
+			isa = PBXGroup;
+			children = (
+				20000000000000000000000F /* DeviceMotionPoseProvider.swift */,
+				200000000000000000000010 /* WorldCalibrationARView.swift */,
+			);
+			path = Calibration;
+			sourceTree = "<group>";
+		};
+		400000000000000000000007 /* ARCapture */ = {
+			isa = PBXGroup;
+			children = (
+				200000000000000000000013 /* ARCaptureModel.swift */,
+			);
+			path = ARCapture;
+			sourceTree = "<group>";
+		};
+		400000000000000000000005 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				20000000000000000000000E /* opencv2.framework */,
+				200000000000000000000011 /* ARKit.framework */,
+				200000000000000000000012 /* SceneKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		400000000000000000000002 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				200000000000000000000000 /* UMIFTiPhoneDualCapture.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		500000000000000000000000 /* UMIFTiPhoneDualCapture */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 600000000000000000000001 /* Build configuration list for PBXNativeTarget "UMIFTiPhoneDualCapture" */;
+			buildPhases = (
+				700000000000000000000000 /* Sources */,
+				300000000000000000000000 /* Frameworks */,
+				700000000000000000000001 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UMIFTiPhoneDualCapture;
+			productName = UMIFTiPhoneDualCapture;
+			productReference = 200000000000000000000000 /* UMIFTiPhoneDualCapture.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		800000000000000000000000 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2600;
+				LastUpgradeCheck = 2600;
+				TargetAttributes = {
+					500000000000000000000000 = {
+						CreatedOnToolsVersion = 26.0;
+					};
+				};
+			};
+			buildConfigurationList = 600000000000000000000000 /* Build configuration list for PBXProject "UMIFTiPhoneDualCapture" */;
+			compatibilityVersion = "Xcode 15.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 400000000000000000000000;
+			productRefGroup = 400000000000000000000002 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				500000000000000000000000 /* UMIFTiPhoneDualCapture */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		700000000000000000000001 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				100000000000000000000005 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		700000000000000000000000 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				100000000000000000000001 /* UMIFTiPhoneDualCaptureApp.swift in Sources */,
+				100000000000000000000002 /* CaptureAppState.swift in Sources */,
+				100000000000000000000006 /* DualCameraCaptureManager.swift in Sources */,
+				100000000000000000000007 /* DualCameraPreviewView.swift in Sources */,
+				100000000000000000000008 /* GripperVisionModels.swift in Sources */,
+				100000000000000000000009 /* GripperVisionProcessor.swift in Sources */,
+				10000000000000000000000A /* GripperMarkerOverlayLayer.swift in Sources */,
+				10000000000000000000000B /* GripperArucoBridge.mm in Sources */,
+				10000000000000000000000D /* DeviceMotionPoseProvider.swift in Sources */,
+				10000000000000000000000E /* WorldCalibrationARView.swift in Sources */,
+				100000000000000000000011 /* ARCaptureModel.swift in Sources */,
+				100000000000000000000003 /* CaptureDashboardView.swift in Sources */,
+				100000000000000000000004 /* CaptureUIComponents.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		900000000000000000000000 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		900000000000000000000001 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		900000000000000000000002 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 8M9CJB4YFP;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "UMI-FT Dual";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera access is required for wide and ultra-wide capture.";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Local network access is required for the desktop receiver.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationLandscapeRight;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/../vendor",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.local.umift.dualcapture;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "App/UMIFTiPhoneDualCapture-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		900000000000000000000003 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 8M9CJB4YFP;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "UMI-FT Dual";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera access is required for wide and ultra-wide capture.";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Local network access is required for the desktop receiver.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationLandscapeRight;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/../vendor",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.local.umift.dualcapture;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "App/UMIFTiPhoneDualCapture-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		600000000000000000000000 /* Build configuration list for PBXProject "UMIFTiPhoneDualCapture" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				900000000000000000000000 /* Debug */,
+				900000000000000000000001 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		600000000000000000000001 /* Build configuration list for PBXNativeTarget "UMIFTiPhoneDualCapture" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				900000000000000000000002 /* Debug */,
+				900000000000000000000003 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 800000000000000000000000 /* Project object */;
+}

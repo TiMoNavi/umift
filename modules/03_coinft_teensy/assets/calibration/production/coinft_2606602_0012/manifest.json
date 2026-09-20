@@ -1,0 +1,30 @@
+{
+  "schema": "umift.coinft.calibration_manifest.v1",
+  "physical_coinft_id": "coinft_2606602_0012",
+  "current_slot": "right",
+  "teensy_connection": "lower numbered active Serial/pins",
+  "calibration_date": "2026-07-03",
+  "archived_at": "2026-07-09",
+  "source_folder": "<original-developer-machine>",
+  "runtime_files": {
+    "onnx": "coinft_2606602_0012_MLP.onnx",
+    "onnx_external_data": "CFT24_MLP.onnx.data",
+    "norm_json": "coinft_2606602_0012_norm.json"
+  },
+  "audit_files": {
+    "torch_checkpoint": "coinft_2606602_0012_MLP.pth",
+    "source_readme": "source_README.md"
+  },
+  "sha256": {
+    "coinft_2606602_0012_model.zip": "b2e001d02d1404cf808a78f34a12d7c9358119dea2512620f79cba659882d626",
+    "coinft_2606602_0012_MLP.onnx": "d6454c60c5099b751c142bcda66c35241d522f7d85df188a177258e9302f3789",
+    "CFT24_MLP.onnx.data": "cc4ad0132d46b2a2981dbe280539c28ee4728217f7324a7cde43aa0cb4e43898",
+    "coinft_2606602_0012_MLP.onnx.data": "cc4ad0132d46b2a2981dbe280539c28ee4728217f7324a7cde43aa0cb4e43898",
+    "coinft_2606602_0012_norm.json": "e0f3160c370e47ca1d1c3984bc220e2d2599f1ee8de177c51d2278d1ac2669c4",
+    "coinft_2606602_0012_MLP.pth": "77fe5e48dcb28fedc9ce6a676333ca526b04fcef05b9f63773df26bfde11ba98"
+  },
+  "notes": [
+    "Runtime ONNX loading requires the external data file named CFT24_MLP.onnx.data next to the ONNX file.",
+    "This model is assigned to right under the current wiring rule."
+  ]
+}

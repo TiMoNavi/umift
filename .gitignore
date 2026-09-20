@@ -1,0 +1,13 @@
+# Runtime data directories — generated locally, never committed or distributed
+runs/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+dist/
+build/
+
+# macOS
+.DS_Store

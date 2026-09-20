@@ -1,0 +1,9 @@
+captures/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.DS_Store
+logs/*.log
+logs/*.pid
+umift_laptop_alignment/capture/receivers/coinft/models/current/
+umift_laptop_alignment/capture/receivers/coinft/models/imported/

@@ -1,0 +1,60 @@
+export:
+  format: umift-replay-buffer-zarr
+  output_name: acp_replay_buffer_gripper.zarr
+
+image:
+  rgb_0:
+    source: iphone
+    size: [224, 224]
+    layout: THWC
+  global_camera:
+    enabled: true
+    source: d435
+    write_rgb: true
+    rgb_field: rgb_global_0
+    write_depth_0: true
+    depth_clip_m: 0.5
+    size: [224, 224]
+    layout: THWC
+
+timestamps:
+  unit: seconds
+  origin: episode_start_aligned_monotonic_ns
+
+gripper:
+  source: iphone_open_percent
+  output: width_m_from_open_fraction_linear
+  fallback_min_width_m: 0.0
+  fallback_max_width_m: 0.08
+
+pose:
+  reference_frame: user_world
+  source_frame: iphone_camera
+  target_frame: gripper_center_tcp
+  representation: pose7_qwxyz
+  euler_input_convention: roll_pitch_yaw_degrees__Rz_yaw_Ry_pitch_Rx_roll
+  translation_unit: m
+  transform: iphone_camera_to_gripper_center_tcp
+  iphone_camera_t_gripper_center_tcp:
+    - [1.0, 0.0, 0.0, 0.039711]
+    - [0.0, -1.0, 0.0, -0.094423]
+    - [0.0, 0.0, -1.0, -0.257957]
+    - [0.0, 0.0, 0.0, 1.0]
+  is_robot_base_absolute: false
+
+force:
+  source: coinft_dual_calibrated
+  write_coinft_passthrough: true
+  write_tool_frame: umi_coinft_to_tcp
+  write_concat: true
+  units: [N, N, N, Nm, Nm, Nm]
+  coinft_to_tcp:
+    dist_coinft2gopro_along_cam_z_m: 0.166
+    dist_coinft2gopro_along_cam_y_m: 0.081
+    gripper_width_source: gripper_width_m_or_open_fraction_linear
+
+actions:
+  ts_pose_command_0: copy_ts_pose_fb_0
+  virtual_target: placeholder_equal_pose_fb
+  stiffness: placeholder_constant
+  stiffness_constant: 0.0

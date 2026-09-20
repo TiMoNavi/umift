@@ -1,0 +1,30 @@
+{
+  "schema": "umift.coinft.left_right_mapping.v1",
+  "created_date": "2026-07-09",
+  "source_folder": "<original-developer-machine>",
+  "teensy_rule": {
+    "left": "higher numbered active Teensy Serial/pins",
+    "right": "lower numbered active Teensy Serial/pins",
+    "packet_payload_order": [
+      "left_raw_12ch",
+      "right_raw_12ch"
+    ]
+  },
+  "slots": {
+    "left": {
+      "physical_coinft_id": "coinft_2606602_0019",
+      "teensy_connection": "higher numbered active Serial/pins",
+      "manifest": "coinft_2606602_0019/manifest.json"
+    },
+    "right": {
+      "physical_coinft_id": "coinft_2606602_0012",
+      "teensy_connection": "lower numbered active Serial/pins",
+      "manifest": "coinft_2606602_0012/manifest.json"
+    }
+  },
+  "notes": [
+    "The CoinFT boards do not electronically identify themselves; the physical wiring record must match this mapping.",
+    "Current production mapping is left=coinft_2606602_0019 and right=coinft_2606602_0012.",
+    "Do not infer left/right from older fixed-UART documentation."
+  ]
+}

@@ -1,0 +1,2 @@
+"""Disk persistence pipeline stage."""
+

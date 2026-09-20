@@ -1,0 +1,1200 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UMIFT Receiver Monitor</title>
+<style>
+:root { color-scheme: light; --bg:#eef2f6; --panel:#ffffff; --ink:#111827; --muted:#64748b; --line:#d7dde5; --green:#15803d; --blue:#1d4ed8; --red:#b91c1c; --amber:#b45309; --dark:#111827; }
+* { box-sizing: border-box; }
+body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif; font-size:14px; letter-spacing:0; }
+button, input, select { font:inherit; }
+.app { padding:14px; display:grid; gap:12px; min-height:100vh; }
+.monitor, .bar, .panel, .card, .status-strip, .metric-tile, .wave-panel { background:var(--panel); border:1px solid var(--line); border-radius:8px; }
+.monitor { width:100%; max-width:1600px; margin:0 auto; aspect-ratio:16/9; min-height:680px; max-height:calc(100vh - 28px); padding:10px; display:grid; grid-template-rows:58px minmax(0,1fr) 150px 92px; gap:10px; overflow:hidden; }
+.status-strip { padding:8px; display:grid; grid-template-columns:minmax(260px,1.4fr) repeat(5,minmax(98px,.52fr)) minmax(320px,2fr); gap:8px; align-items:stretch; }
+.status-block { min-width:0; padding:6px 8px; border:1px solid var(--line); border-radius:6px; background:#fbfcfd; overflow:hidden; }
+.status-block .k, .metric-tile span, .wave-title, .view-title { color:var(--muted); font-size:12px; }
+.status-block .v { margin-top:3px; font-weight:700; font-size:17px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.status-block.reason .v { font-size:13px; font-weight:500; white-space:normal; line-height:1.25; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; }
+.video-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; min-height:0; }
+.video-panel { min-height:0; display:grid; grid-template-rows:auto minmax(0,1fr); gap:6px; }
+.view-head { display:flex; align-items:center; justify-content:space-between; gap:8px; min-height:26px; }
+.view-actions { display:flex; align-items:center; gap:8px; min-width:0; }
+.view-title { font-weight:700; color:var(--ink); font-size:14px; }
+.segmented { display:flex; border:1px solid #94a3b8; border-radius:7px; overflow:hidden; background:#f8fafc; }
+.segmented button { height:28px; border:0; border-left:1px solid #cbd5e1; border-radius:0; padding:0 10px; background:transparent; }
+.segmented button:first-child { border-left:0; }
+.segmented button.active { background:var(--dark); color:white; }
+label { display:grid; gap:4px; color:var(--muted); font-size:12px; }
+input, select { height:34px; border:1px solid var(--line); border-radius:6px; padding:0 8px; background:white; color:var(--ink); min-width:0; }
+button { height:34px; border:1px solid #9aa4b2; border-radius:6px; padding:0 12px; background:#f8fafc; color:#111827; cursor:pointer; }
+button.primary { background:#1f2937; color:white; border-color:#1f2937; }
+button.danger { background:#fff7ed; color:#9a3412; border-color:#fdba74; }
+button.secondary { background:#f8fafc; color:#334155; border-color:#cbd5e1; }
+.bar { padding:10px; display:grid; grid-template-columns:minmax(280px,1.8fr) 118px 132px 100px 120px 80px 92px 92px 108px 96px; gap:8px; align-items:end; }
+.cards { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:10px; }
+.card { padding:10px; min-height:70px; }
+.card .k { color:var(--muted); font-size:12px; }
+.card .v { margin-top:6px; font-size:22px; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.main { display:grid; grid-template-columns:minmax(620px,3fr) minmax(360px,2fr); gap:12px; min-height:0; }
+.panel { padding:12px; min-height:0; }
+.panel h2 { margin:0 0 10px; font-size:16px; }
+.iphone-meta { display:grid; gap:8px; grid-template-columns:1fr 1fr; margin-top:10px; }
+.metric-line { padding:8px; border:1px solid var(--line); border-radius:6px; background:#fbfcfd; min-height:42px; }
+.metric-line span { color:var(--muted); }
+.preview { width:100%; height:100%; min-height:0; background:#111827; border-radius:6px; display:grid; place-items:center; color:#d1d5db; overflow:hidden; border:1px solid #263244; position:relative; }
+.preview img, .preview video { width:100%; height:100%; object-fit:contain; display:block; }
+.preview .placeholder { padding:16px; text-align:center; line-height:1.45; }
+.d435 { display:grid; gap:10px; }
+.d435-toolbar { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.wave-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; min-height:0; }
+.wave-panel { padding:8px; min-width:0; display:grid; grid-template-rows:auto minmax(0,1fr); gap:6px; overflow:hidden; }
+.wave-panel canvas { width:100%; height:100%; min-width:0; min-height:0; border:1px solid var(--line); border-radius:6px; background:white; display:block; }
+.numeric-strip { display:grid; grid-template-columns:1.35fr 1fr 1.1fr 1.1fr 1.2fr; gap:8px; min-height:0; }
+.metric-tile { padding:8px; min-width:0; overflow:hidden; }
+.metric-tile div { margin-top:4px; font-size:13px; line-height:1.25; white-space:normal; overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; }
+.details { display:grid; gap:12px; max-width:1600px; width:100%; margin:0 auto; }
+.teensy { display:grid; grid-template-columns:220px 1fr; gap:12px; align-items:stretch; }
+.teensy-controls { display:grid; gap:8px; align-content:start; }
+.teensy-controls .readout { padding:8px; border:1px solid var(--line); border-radius:6px; background:#fbfcfd; min-height:34px; }
+.derived { display:grid; grid-template-columns:120px 96px minmax(210px,1fr) minmax(240px,1.2fr) 170px minmax(190px,.8fr); gap:8px; align-items:end; }
+.derived .metric-line { min-height:50px; }
+.derived .wide { grid-column:span 2; }
+.loggrid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+pre { margin:0; height:150px; overflow:auto; background:white; border:1px solid var(--line); border-radius:6px; padding:8px; font:12px Menlo,Consolas,monospace; white-space:pre-wrap; }
+dialog { width:min(520px,calc(100vw - 32px)); border:1px solid var(--line); border-radius:8px; padding:0; color:var(--ink); box-shadow:0 20px 60px rgba(15,23,42,.24); }
+dialog::backdrop { background:rgba(15,23,42,.42); }
+.dialog-body { padding:18px; display:grid; gap:12px; }
+.dialog-body h2 { margin:0; font-size:18px; }
+.dialog-actions { display:flex; justify-content:flex-end; gap:8px; }
+.ok { color:var(--green); } .warn { color:var(--amber); } .bad { color:var(--red); }
+@media (max-width: 1000px) { .monitor { aspect-ratio:auto; max-height:none; min-height:0; grid-template-rows:auto auto 260px auto; } .status-strip,.video-grid,.wave-grid,.numeric-strip,.bar,.main,.loggrid,.teensy,.derived { grid-template-columns:1fr; } .cards { grid-template-columns:repeat(2,minmax(0,1fr)); } .preview { min-height:260px; } }
+</style>
+</head>
+<body>
+<div class="app">
+  <section class="monitor">
+    <div class="status-strip">
+      <div class="status-block"><div class="k">Status</div><div id="status" class="v">idle</div></div>
+      <div class="status-block"><div class="k">Gate</div><div id="gate" class="v">blocked</div></div>
+      <div class="status-block"><div class="k">Sync</div><div id="syncQuality" class="v">--</div></div>
+      <div class="status-block"><div class="k">Frames</div><div id="frames" class="v">0</div></div>
+      <div class="status-block"><div class="k">Events</div><div id="events" class="v">0</div></div>
+      <div class="status-block"><div class="k">Latency</div><div id="latency" class="v">--</div></div>
+      <div class="status-block reason"><div class="k">Exception</div><div id="healthReasons" class="v">--</div></div>
+    </div>
+
+    <div class="video-grid">
+      <section class="video-panel">
+        <div class="view-head">
+          <div class="view-title">iPhone</div>
+          <div id="iphoneFreshness" class="view-title">--</div>
+        </div>
+        <div class="preview" id="iphonePreview">
+          <video id="iphoneVideo" muted autoplay playsinline style="display:none"></video>
+          <div id="iphonePlaceholder" class="placeholder">Waiting for iPhone H.264 V2 stream</div>
+        </div>
+      </section>
+      <section class="video-panel">
+        <div class="view-head">
+          <div class="view-title">D435</div>
+          <div class="view-actions">
+            <div id="d435Freshness" class="view-title">--</div>
+            <div class="segmented">
+              <button id="d435ModeRgb" class="active">RGB</button>
+              <button id="d435ModeDepth">Depth</button>
+            </div>
+          </div>
+        </div>
+        <div class="preview">
+          <img id="d435PreviewImg" alt="D435 preview" style="display:none">
+          <div id="d435Placeholder" class="placeholder">Waiting for D435 preview</div>
+        </div>
+      </section>
+    </div>
+
+    <div class="wave-grid">
+      <div class="wave-panel">
+        <div class="wave-title">CoinFT Left</div>
+        <canvas id="coinLeftChart" width="760" height="128"></canvas>
+      </div>
+      <div class="wave-panel">
+        <div class="wave-title">CoinFT Right</div>
+        <canvas id="coinRightChart" width="760" height="128"></canvas>
+      </div>
+    </div>
+
+    <div class="numeric-strip">
+      <div class="metric-tile"><span>6DoF Pose</span><div id="pose">--</div></div>
+      <div class="metric-tile"><span>Gripper</span><div id="gripper">--</div></div>
+      <div class="metric-tile"><span>iPhone Timestamp</span><div id="timestamp">--</div></div>
+      <div class="metric-tile"><span>D435</span><div id="d435Status">idle</div></div>
+      <div class="metric-tile"><span>CoinFT</span><div id="teensyStatus">idle</div></div>
+    </div>
+  </section>
+
+  <section class="details">
+    <div class="bar">
+      <label>Dataset<select id="datasetSelect"><option value="">Select Dataset</option></select></label>
+      <button id="newDataset" class="secondary">New Dataset</button>
+      <button id="resumeDataset" class="secondary">Resume Dataset</button>
+      <label>Transport<select id="transport"><option>usb</option><option>tcp</option></select></label>
+      <label>Host<input id="host" value="127.0.0.1"></label>
+      <label>Port<input id="port" value="17381"></label>
+      <input id="outputRoot" type="hidden">
+      <input id="runDir" type="hidden">
+      <button id="start" class="primary">Arm</button>
+      <button id="stop" class="danger">Stop</button>
+      <button id="armAll" class="primary">Arm All</button>
+      <button id="openOutput">Open Output</button>
+    </div>
+
+    <section class="panel">
+      <h2>Controls And Details</h2>
+      <div class="iphone-meta">
+        <div class="metric-line"><span>Session</span><div id="session">--</div></div>
+        <div class="metric-line"><span>Alignment</span><div id="alignment">--</div></div>
+        <div class="metric-line"><span>RGB</span><div id="rgb">--</div></div>
+        <div class="metric-line"><span>D435 Recording</span><div id="d435RecordStatus">controlled by iPhone</div></div>
+        <div class="metric-line"><span>Teensy Samples</span><div id="teensySamples">0 / 0</div></div>
+        <div class="metric-line"><span>CoinFT Calibration</span><div id="coinftCalibration">raw</div></div>
+        <div class="metric-line"><span>Teensy Means</span><div id="teensyMeans">--</div></div>
+        <div class="metric-line"><span>Teensy Output</span><div id="teensyOutput">--</div></div>
+        <label>CoinFT model set path (empty = raw-only)<input id="coinftModelDir" placeholder="folder with model_set.json or left/right"></label>
+        <label>Left ONNX path<input id="coinftLeftModel" placeholder="/path/to/left_model.onnx"></label>
+        <label>Left norm path<input id="coinftLeftNorm" placeholder="/path/to/left_norm.json"></label>
+        <label>Right ONNX path<input id="coinftRightModel" placeholder="/path/to/right_model.onnx"></label>
+        <label>Right norm path<input id="coinftRightNorm" placeholder="/path/to/right_norm.json"></label>
+        <button id="coinftUseModel">Use CoinFT Model Paths</button>
+        <label>Record seconds<input id="d435Duration" value="7200"></label>
+        <label>Pre-roll seconds<input id="recordingPreroll" value="1.5"></label>
+        <label>Buffer seconds<input id="streamBuffer" value="3.0"></label>
+      </div>
+      <div class="d435-toolbar" style="margin-top:10px">
+        <button id="d435Start" class="primary">Start D435 Preview</button>
+        <button id="d435Stop" class="danger">Stop D435</button>
+        <button id="teensyStart" class="primary">Start / Re-zero CoinFT</button>
+        <button id="teensyStop" class="danger">Stop CoinFT</button>
+      </div>
+    </section>
+
+    <section class="panel derived">
+      <button id="normalize" class="primary">Normalize</button>
+      <button id="align" class="primary">Align</button>
+      <label>Exporter<select id="exportFormat"></select></label>
+      <label>Profile<select id="exportProfile"></select></label>
+      <button id="exportSelected" class="primary">Export Selected Format</button>
+      <div class="metric-line"><span>Derived</span><div id="derivedStatus">--</div></div>
+      <div class="metric-line"><span>Export</span><div id="exportStatus">--</div></div>
+      <div class="metric-line wide"><span>Gate / Sync Reasons</span><div id="detailHealthReasons">--</div></div>
+    </section>
+    <div class="loggrid">
+      <section class="panel"><h2>Recording Events</h2><pre id="eventLog"></pre></section>
+      <section class="panel"><h2>Receiver Log</h2><pre id="log"></pre></section>
+    </div>
+  </section>
+</div>
+<dialog id="datasetDialog">
+  <div class="dialog-body">
+    <h2>New Dataset</h2>
+    <label>Dataset name<input id="datasetName" autocomplete="off"></label>
+    <label>Task name<input id="datasetTask" autocomplete="off"></label>
+    <label>Notes<input id="datasetNotes" autocomplete="off"></label>
+    <div class="dialog-actions">
+      <button id="cancelDataset" type="button">Cancel</button>
+      <button id="createDataset" type="button" class="primary">Create Dataset</button>
+    </div>
+  </div>
+</dialog>
+<script>
+const $ = (id) => document.getElementById(id);
+let outputRoot = "";
+let sessionDir = "";
+let datasetCatalog = [];
+let startedAt = performance.now();
+let d435Mode = "rgb";
+let coinLeftHistory = [];
+let coinRightHistory = [];
+let coinftPreviewMode = "raw";
+let latestState = {};
+let d435RefreshTimer = null;
+let pendingState = null;
+let stateFlushTimer = null;
+let pendingSample = null;
+let sampleFlushTimer = null;
+let lastCoinDrawAt = 0;
+let coinDrawTimer = null;
+const PREVIEW_BUFFER_FRAMES = 4;
+const previewBuffers = {
+  d435Rgb: {urls: [], loading: false, misses: 0, generation: 0},
+  d435Depth: {urls: [], loading: false, misses: 0, generation: 0},
+  _iphone: {urls: [], loading: false, misses: 0, generation: 0},
+};
+const objectStateKeys = new Set(["stats", "alignment", "teensy", "coinft", "d435", "d435_recording", "derived", "zarr_conversion", "zarr_recording", "export_control", "postprocess", "dataset_selection", "recording_control", "recording_gate", "recording_pipeline", "capture_summary", "sync_quality", "latest_frame", "capture_options", "buffering", "iphone_video"]);
+function line(pre, text) {
+  if (!text) return;
+  pre.textContent += text + "\n";
+  pre.scrollTop = pre.scrollHeight;
+}
+function fmt(v, d=2) {
+  return typeof v === "number" && Number.isFinite(v) ? v.toFixed(d) : "--";
+}
+function finiteNumber(value, fallback=0) {
+  const number = Number(value);
+  return Number.isFinite(number) ? number : fallback;
+}
+function reasonsText(items) {
+  return Array.isArray(items) && items.length ? items.join("; ") : "ok";
+}
+function syncSelectOptions(el, options, selectedValue) {
+  const signature = JSON.stringify(options);
+  if (el.dataset.optionsSignature !== signature) {
+    el.innerHTML = "";
+    for (const option of options) {
+      const node = document.createElement("option");
+      node.value = option.value;
+      node.textContent = option.label;
+      el.appendChild(node);
+    }
+    el.dataset.optionsSignature = signature;
+  }
+  const value = selectedValue || "";
+  if (document.activeElement !== el && el.value !== value) el.value = value;
+}
+function exportFormatLabel(item) {
+  const names = {
+    "umift-replay-buffer-zarr": "UMI-FT Replay Buffer",
+  };
+  const label = names[item.name] || item.name;
+  return item.version ? `${label} (${item.version})` : label;
+}
+function updateExportControls(exportControl) {
+  const formats = Array.isArray(exportControl.available_formats) ? exportControl.available_formats : [];
+  const selectedFormat = exportControl.selected_format || (formats[0] ? formats[0].name : "");
+  const formatOptions = formats.map((item) => ({
+    value: item.name,
+    label: exportFormatLabel(item),
+  }));
+  syncSelectOptions($("exportFormat"), formatOptions, selectedFormat);
+
+  const profiles = Array.isArray(exportControl.available_profiles) ? exportControl.available_profiles : [];
+  const compatibleProfiles = profiles.filter((item) => !item.format || item.format === selectedFormat);
+  const profileOptions = [{value:"", label:"default config"}].concat(compatibleProfiles.map((item) => ({
+    value: item.path || "",
+    label: item.error ? `${item.name || item.path} (error)` : `${item.name || item.path}`,
+  })));
+  const selectedProfile = compatibleProfiles.some((item) => item.path === exportControl.selected_profile) ? exportControl.selected_profile : "";
+  syncSelectOptions($("exportProfile"), profileOptions, selectedProfile);
+
+  const manifest = exportControl.last_manifest || {};
+  const output = manifest.outputs && (manifest.outputs.zarr || manifest.outputs.output_dir || manifest.outputs.export_config);
+  const err = exportControl.last_error ? ` error=${exportControl.last_error}` : "";
+  const profileText = exportControl.selected_profile ? ` profile=${exportControl.selected_profile}` : "";
+  const outputText = output ? ` -> ${output}` : "";
+  $("exportStatus").textContent = `${exportControl.status || "idle"} ${selectedFormat || "--"}${profileText}${outputText}${err}`;
+}
+function mergeState(next) {
+  for (const [key, value] of Object.entries(next || {})) {
+    if (objectStateKeys.has(key) && value && typeof value === "object" && !Array.isArray(value)) {
+      latestState[key] = {...(latestState[key] || {}), ...value};
+    } else {
+      latestState[key] = value;
+    }
+  }
+  return latestState;
+}
+function ageText(ms) {
+  if (typeof ms !== "number" || !Number.isFinite(ms)) return "--";
+  return ms < 1000 ? `${ms.toFixed(0)} ms` : `${(ms / 1000).toFixed(1)} s`;
+}
+function streamLabel(name, stream, fallbackRunning=false) {
+  if (stream && stream.ok) return `${name} live ${ageText(stream.age_ms ?? stream.rgb_age_ms)}`;
+  if (fallbackRunning) return `${name} waiting`;
+  return `${name} missing`;
+}
+function displayStatus(s) {
+  const control = s.recording_control || {};
+  if (control.active) return "recording";
+  if (s.running && String(s.status || "").startsWith("connected")) return "iPhone live";
+  return s.status || "idle";
+}
+function d435Label(d435, d435rec, stream) {
+  if (d435rec.running) {
+    return stream && stream.ok ? `recording preview ${ageText(stream.rgb_age_ms)}` : "recording";
+  }
+  if (stream && stream.ok) return `fresh rgb=${ageText(stream.rgb_age_ms)} depth=${ageText(stream.depth_age_ms)}`;
+  return d435.running ? `starting pid=${d435.pid || "--"}` : "idle";
+}
+function d435FreshLabel(d435, d435rec, stream) {
+  if (d435rec.running) {
+    return stream && stream.ok ? `D435 recording ${ageText(stream.rgb_age_ms)}` : "D435 recording";
+  }
+  return streamLabel("D435", stream, d435.running);
+}
+function summaryStreamLabel(name, stream) {
+  if (!stream) return `${name} missing`;
+  const span = typeof stream.buffer_span_ms === "number" ? ` buffer=${(stream.buffer_span_ms / 1000).toFixed(1)}s` : "";
+  if (stream.ok) return `${name} live ${ageText(stream.age_ms)}${span}`;
+  if (stream.running) return `${name} waiting${span}`;
+  return stream.last_error ? `${name} error` : `${name} missing`;
+}
+function patchState(s) {
+  s = mergeState(s);
+  const summary = s.capture_summary || {};
+  const summaryStreams = summary.streams || {};
+  const iphoneSummary = summaryStreams.iphone || {};
+  const d435Summary = summaryStreams.d435 || {};
+  const coinftSummary = summaryStreams.coinft || {};
+  $("status").textContent = s.running ? displayStatus(s) : (summary.status || displayStatus(s));
+  $("session").textContent = s.session_id || "--";
+  if (s.run_dir) $("runDir").value = s.run_dir;
+  const datasetSelection = s.dataset_selection || {};
+  if (datasetSelection.run_dir && $("datasetSelect").value !== datasetSelection.run_dir) {
+    $("datasetSelect").value = datasetSelection.run_dir;
+  }
+  sessionDir = s.session_dir || sessionDir;
+  const stats = s.stats || {};
+  const align = s.alignment || {};
+  const teensy = s.teensy || {};
+  const coinftState = s.coinft || teensy;
+  const d435 = s.d435 || {};
+  const d435rec = s.d435_recording || {};
+  const derived = s.derived || {};
+  const zarr = s.zarr_conversion || {};
+  const zarrRecording = s.zarr_recording || {};
+  const exportControl = s.export_control || {};
+  const postprocess = s.postprocess || {};
+  const control = s.recording_control || {};
+  const gate = s.recording_gate || {};
+  const captureOptions = s.capture_options || {};
+  const streams = gate.streams || {};
+  const iphoneStream = streams.iphone || {};
+  const d435Stream = streams.d435 || {};
+  const sync = s.sync_quality || {};
+  $("frames").textContent = stats.frame_count ?? 0;
+  $("events").textContent = stats.event_count ?? 0;
+  $("alignment").textContent = align.status || "--";
+  $("latency").textContent = typeof align.estimated_receive_latency_ns === "number" ? (align.estimated_receive_latency_ns / 1e6).toFixed(2) + " ms" : "--";
+  const ready = typeof summary.ready === "boolean" ? summary.ready : !!gate.ok;
+  $("gate").textContent = ready ? "ready" : "blocked";
+  $("gate").className = "v " + (ready ? "ok" : "bad");
+  $("syncQuality").textContent = sync.status || "--";
+  $("syncQuality").className = "v " + (sync.ok ? "ok" : (sync.status === "not_checked" ? "warn" : "bad"));
+  $("teensyStatus").textContent = summaryStreamLabel("CoinFT", coinftSummary);
+  $("teensySamples").textContent = `${coinftSummary.live_sample_count ?? teensy.live_sample_count ?? 0} live / ${coinftSummary.recorded_sample_count ?? teensy.recorded_sample_count ?? 0} saved`;
+  const missingSide = coinftState.missing_side || coinftSummary.missing_side;
+  const missingText = missingSide ? ` missing=${missingSide}` : "";
+  const zeroMax = coinftState.zero_force_max_abs_n ?? coinftSummary.zero_force_max_abs_n;
+  const zeroLimit = coinftState.zero_force_limit_n ?? coinftSummary.zero_force_limit_n;
+  const stabilityPasses = coinftState.stability_passes ?? coinftSummary.stability_passes;
+  const stabilityRequired = coinftState.stability_required_passes ?? coinftSummary.stability_required_passes;
+  const zeroText = typeof zeroMax === "number" ? ` / zero ${zeroMax.toFixed(3)} N <= ${Number(zeroLimit || 0.15).toFixed(3)} N` : "";
+  const stabilityText = typeof stabilityPasses === "number" && typeof stabilityRequired === "number" ? ` / stable ${stabilityPasses}/${stabilityRequired}` : "";
+  const calibrationText = `${coinftState.mode || coinftSummary.calibration_mode || "raw"} / ${coinftState.calibration_status || coinftSummary.calibration_status || "--"}${stabilityText}${zeroText}${missingText}`;
+  $("coinftCalibration").textContent = coinftState.calibration_error || coinftSummary.calibration_error || calibrationText;
+  $("teensyMeans").textContent = typeof coinftState.left_mean === "number" ? `L ${coinftState.left_mean.toFixed(1)} / R ${coinftState.right_mean.toFixed(1)} / ${fmt(coinftSummary.fps ?? coinftState.fps,1)} Hz` : "--";
+  $("teensyOutput").textContent = coinftFaultText() || coinftState.output_csv || coinftSummary.last_error || coinftState.last_error || "--";
+  if (coinftFaultText()) scheduleCoinFTDraw();
+  updateCoinftDrift(s);
+  $("d435Status").textContent = d435Summary.ok || d435Summary.running ? summaryStreamLabel("D435", d435Summary) : d435Label(d435, d435rec, d435Stream);
+  $("d435RecordStatus").textContent = d435rec.running ? `recording from iPhone pid=${d435rec.pid || "--"} -> ${d435rec.output_dir || "--"}` : (control.active ? "opening..." : "waiting for iPhone record");
+  if (typeof captureOptions.recording_preroll_s === "number" && document.activeElement !== $("recordingPreroll")) $("recordingPreroll").value = captureOptions.recording_preroll_s;
+  if (typeof captureOptions.stream_buffer_s === "number" && document.activeElement !== $("streamBuffer")) $("streamBuffer").value = captureOptions.stream_buffer_s;
+  const n = derived.normalized, a = derived.aligned;
+  $("derivedStatus").textContent = a ? `aligned rows=${a.counts?.timeline_rows ?? 0} episodes=${a.episodes ?? 0}` : (n ? `normalized iPhone=${n.iphone?.frame_count ?? 0} d435=${n.d435?.frame_count ?? 0} coinft=${n.coinft?.sample_count ?? 0}` : (zarrRecording.active ? `live zarr writing rows=${zarrRecording.completed_rows_written ?? 0}` : (zarr.status ? `live zarr ${zarr.status} rows=${zarr.converted_rows ?? 0}` : "--")));
+  updateExportControls(exportControl);
+  const datasetSwitchBlocked = !!s.running || !!control.active || postprocess.status === "running" || exportControl.status === "exporting";
+  $("datasetSelect").disabled = datasetSwitchBlocked;
+  $("newDataset").disabled = datasetSwitchBlocked;
+  $("resumeDataset").disabled = datasetSwitchBlocked || !$("datasetSelect").value;
+  $("healthReasons").textContent = `gate: ${reasonsText(summary.gate_reasons || gate.reasons)} | sync: ${reasonsText(sync.reasons)}`;
+  $("detailHealthReasons").textContent = $("healthReasons").textContent;
+  const iphoneVideo = s.iphone_video || {};
+  const format = iphoneVideo.width && iphoneVideo.height
+    ? `${iphoneVideo.width}x${iphoneVideo.height}@${iphoneVideo.frames_per_second || "--"}`
+    : "1920x1440@30";
+  $("iphoneFreshness").textContent = `${format} ${summaryStreamLabel("iPhone", iphoneSummary)}`;
+  $("iphoneFreshness").className = "view-title " + (iphoneSummary.ok ? "ok" : "bad");
+  const latestFrame = s.latest_frame || {};
+  const latestTimestamp = latestFrame.timestamp || {};
+  const latestRgb = latestFrame.rgb || {};
+  const latestPose = latestFrame.pose || {};
+  const latestGripper = latestFrame.gripper || {};
+  $("timestamp").textContent = `seq=${latestFrame.sequence ?? "--"} phone=${latestTimestamp.phone_local_capture_ns ?? "--"} receive=${latestTimestamp.mac_receive_monotonic_ns ?? "--"}`;
+  $("pose").textContent = latestPose.valid
+    ? `x=${fmt(latestPose.x_m,3)} y=${fmt(latestPose.y_m,3)} z=${fmt(latestPose.z_m,3)} rpy=(${fmt(latestPose.roll_deg,1)}, ${fmt(latestPose.pitch_deg,1)}, ${fmt(latestPose.yaw_deg,1)})`
+    : (latestPose.status === "v2_packet_pending" ? "V2 pose packet pending" : "world pose unavailable");
+  $("gripper").textContent = latestGripper.valid
+    ? `open=${fmt(latestGripper.open_percent,1)}% age=${fmt(latestGripper.age_ms,1)} ms`
+    : (latestGripper.status === "v2_packet_pending" ? "V2 gripper packet pending" : "gripper unavailable");
+  $("rgb").textContent = `${latestRgb.width || iphoneVideo.width || 1920} x ${latestRgb.height || iphoneVideo.height || 1440} ${latestRgb.codec || "h264"} sequence=${latestFrame.sequence ?? "--"}`;
+  $("d435Freshness").textContent = d435Summary.ok || d435Summary.running ? summaryStreamLabel("D435", d435Summary) : d435FreshLabel(d435, d435rec, d435Stream);
+  $("d435Freshness").className = "view-title " + ((d435Summary.ok || d435Summary.recording || d435Stream.ok || d435rec.running) ? "ok" : "bad");
+  if (d435PreviewFaultText()) showD435Unavailable(d435PreviewFaultText());
+  if (s.latest_event) line($("eventLog"), s.latest_event);
+}
+function scheduleState(s) {
+  pendingState = {...(pendingState || {}), ...(s || {})};
+  if (stateFlushTimer !== null) return;
+  stateFlushTimer = setTimeout(() => {
+    const next = pendingState || {};
+    pendingState = null;
+    stateFlushTimer = null;
+    patchState(next);
+  }, 100);
+}
+function patchSample(m) {
+  if (m.event_text) line($("eventLog"), m.event_text);
+  if (m.row_type !== "frame") return;
+  const n = m.normalized || {};
+  const pose = n.pose || {};
+  const gripper = n.gripper || {};
+  const ts = n.timestamp || {};
+  const rgb = n.rgb || {};
+  $("pose").textContent = `x=${fmt(pose.x_m,3)} y=${fmt(pose.y_m,3)} z=${fmt(pose.z_m,3)} rpy=(${fmt(pose.roll_deg,1)}, ${fmt(pose.pitch_deg,1)}, ${fmt(pose.yaw_deg,1)}) tracking=${pose.tracking || "--"}`;
+  $("gripper").textContent = `valid=${gripper.valid} open=${fmt(gripper.open_percent,1)}% age=${fmt(gripper.sample_age_ms,1)} ms ts=${gripper.aligned_monotonic_ns ?? "--"}`;
+  $("timestamp").textContent = `seq=${n.sequence ?? "--"} aligned=${ts.aligned_monotonic_ns ?? "--"} phone=${ts.phone_local_capture_ns ?? "--"}`;
+  const sourceSize = rgb.width && rgb.height ? `${rgb.width} x ${rgb.height}` : "--";
+  $("rgb").textContent = `source ${sourceSize} ${rgb.codec || "h264"} ${rgb.has_payload ? "encoded access unit" : "metadata pending"}`;
+}
+function scheduleSample(m) {
+  pendingSample = m;
+  if (sampleFlushTimer !== null) return;
+  sampleFlushTimer = setTimeout(() => {
+    const next = pendingSample;
+    pendingSample = null;
+    sampleFlushTimer = null;
+    if (next) patchSample(next);
+  }, 100);
+}
+async function post(path, payload={}) {
+  const res = await fetch(path, {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(payload)});
+  const result = await res.json();
+  if (!res.ok || result.ok === false) throw new Error(result.error || `request failed: ${res.status}`);
+  return result;
+}
+function datasetOptionLabel(row) {
+  const task = row.task_name ? ` · ${row.task_name}` : "";
+  const compatibility = row.compatible === false ? " · incompatible" : "";
+  return `${row.display_name}${task} · ${row.episode_count} episodes · ${row.zarr_count} Zarr${compatibility}`;
+}
+async function refreshDatasets(preferredRunDir="") {
+  const response = await fetch("/datasets");
+  const payload = await response.json();
+  datasetCatalog = payload.datasets || [];
+  const selected = preferredRunDir || latestState.dataset_selection?.run_dir || "";
+  $("datasetSelect").innerHTML = '<option value="">Select Dataset</option>' + datasetCatalog.map(row => `<option value="${row.run_dir}">${datasetOptionLabel(row)}</option>`).join("");
+  if (selected && datasetCatalog.some(row => row.run_dir === selected)) $("datasetSelect").value = selected;
+  $("resumeDataset").disabled = !$("datasetSelect").value;
+}
+function captureArgs() {
+  return {
+    transport:$("transport").value,
+    host:$("host").value,
+    port:Number($("port").value),
+    output_root:$("outputRoot").value || outputRoot,
+    run_dir:$("runDir").value,
+    d435_duration_s:Number($("d435Duration").value || 7200),
+    recording_preroll_s:Number($("recordingPreroll").value || 1.5),
+    stream_buffer_s:Number($("streamBuffer").value || 3.0),
+  };
+}
+function mainCommand(command, args={}) {
+  return post("/main/command", {command, args});
+}
+$("start").onclick = () => {
+  if (!latestState.dataset_selection?.selected) return line($("log"), "Select or create a Dataset before arming capture");
+  return mainCommand("arm_capture", captureArgs()).catch(err => line($("log"), err.message));
+};
+$("stop").onclick = () => mainCommand("stop_capture").catch(err => line($("log"), err.message));
+$("openOutput").onclick = () => mainCommand("open_output").catch(err => line($("log"), err.message));
+$("armAll").onclick = async () => {
+  if (!latestState.dataset_selection?.selected) {
+    line($("log"), "首次使用：正在自动创建 Dataset…");
+    const created = await mainCommand("create_dataset", {
+      display_name: "dataset_" + new Date().toISOString().slice(0, 10),
+      task_name: "capture",
+      notes: "Automatically created on first Arm All",
+    }).catch(err => { line($("log"), "Dataset 创建失败：" + err.message); return null; });
+    if (!created) return;
+    $("runDir").value = created.selection.run_dir;
+    await refreshDatasets(created.selection.run_dir);
+    line($("log"), "Dataset 已创建，正在发现并启动 iPhone / D435 / CoinFT…");
+  }
+  const result = await mainCommand("arm_all", captureArgs()).catch(err => { line($("log"), "Arm All 失败：" + err.message); return null; });
+  if (!result) return;
+  if (result.run_dir) $("runDir").value = result.run_dir;
+};
+$("datasetSelect").onchange = () => { $("resumeDataset").disabled = !$("datasetSelect").value; };
+$("newDataset").onclick = () => {
+  $("datasetName").value = "";
+  $("datasetTask").value = "";
+  $("datasetNotes").value = "";
+  $("datasetDialog").showModal();
+  $("datasetName").focus();
+};
+$("cancelDataset").onclick = () => $("datasetDialog").close();
+$("createDataset").onclick = async () => {
+  const displayName = $("datasetName").value.trim();
+  if (!displayName) return line($("log"), "Dataset name is required");
+  const result = await mainCommand("create_dataset", {
+    display_name:displayName,
+    task_name:$("datasetTask").value.trim() || displayName,
+    notes:$("datasetNotes").value.trim(),
+  }).catch(err => { line($("log"), err.message); return null; });
+  if (!result) return;
+  $("datasetDialog").close();
+  $("runDir").value = result.selection.run_dir;
+  await refreshDatasets(result.selection.run_dir);
+};
+$("resumeDataset").onclick = async () => {
+  const runDir = $("datasetSelect").value;
+  if (!runDir) return;
+  const row = datasetCatalog.find(item => item.run_dir === runDir);
+  if (row && row.compatible === false) return line($("log"), row.compatibility_issues.join("; "));
+  const result = await mainCommand("select_dataset", {run_dir:runDir}).catch(err => { line($("log"), err.message); return null; });
+  if (!result) return;
+  $("runDir").value = result.selection.run_dir;
+  await refreshDatasets(result.selection.run_dir);
+};
+$("teensyStart").onclick = () => mainCommand("start_coinft").catch(err => line($("log"), err.message));
+$("teensyStop").onclick = () => mainCommand("stop_coinft").catch(err => line($("log"), err.message));
+$("coinftUseModel").onclick = async () => {
+  const modelDir = $("coinftModelDir").value.trim();
+  const leftModel = $("coinftLeftModel").value.trim();
+  const leftNorm = $("coinftLeftNorm").value.trim();
+  const rightModel = $("coinftRightModel").value.trim();
+  const rightNorm = $("coinftRightNorm").value.trim();
+  const pathValues = [leftModel, leftNorm, rightModel, rightNorm];
+  if (!modelDir && pathValues.every(value => !value)) {
+    line($("log"), "Choose a CoinFT model folder or enter all four model paths");
+    return;
+  }
+  if (!modelDir && pathValues.some(value => !value)) {
+    line($("log"), "Left/right ONNX and norm paths must all be provided");
+    return;
+  }
+  const result = await mainCommand("activate_coinft_model_folder", {
+    model_dir:modelDir,
+    left_model_path:leftModel,
+    left_norm_path:leftNorm,
+    right_model_path:rightModel,
+    right_norm_path:rightNorm,
+  }).catch(err => ({ok:false, error:err.message}));
+  line($("log"), result.ok === false ? `CoinFT model selection failed: ${result.error || "unknown"}` : `CoinFT model active: ${result.model_set_id || "current"}`);
+};
+$("d435Start").onclick = () => mainCommand("start_d435_preview").catch(err => line($("log"), err.message));
+$("d435Stop").onclick = () => mainCommand("stop_d435").catch(err => line($("log"), err.message));
+$("normalize").onclick = () => mainCommand("normalize").catch(err => line($("log"), err.message));
+$("align").onclick = () => mainCommand("align").catch(err => line($("log"), err.message));
+$("exportFormat").onchange = () => {
+  mainCommand("configure_export", {format:$("exportFormat").value}).catch(err => line($("log"), err.message));
+};
+$("exportProfile").onchange = () => {
+  mainCommand("configure_export", {profile:$("exportProfile").value}).catch(err => line($("log"), err.message));
+};
+$("exportSelected").onclick = async () => {
+  const result = await mainCommand("export_selected").catch(err => ({ok:false, error:err.message}));
+  if (result.ok === false) line($("log"), `Export failed: ${result.error || "unknown"}`);
+};
+$("d435ModeRgb").onclick = () => setD435Mode("rgb");
+$("d435ModeDepth").onclick = () => setD435Mode("depth");
+function setD435Mode(mode) {
+  d435Mode = mode;
+  $("d435ModeRgb").classList.toggle("active", mode === "rgb");
+  $("d435ModeDepth").classList.toggle("active", mode === "depth");
+  refreshImages(true);
+}
+function connectEvents() {
+  const es = new EventSource("/events");
+  es.onmessage = (ev) => {
+    const m = JSON.parse(ev.data);
+    if (m.type === "state") scheduleState(m.state || {});
+    if (m.type === "sample") scheduleSample(m);
+    if (m.type === "coinft_preview_sample") patchCoinFTPreview(m.sample || {});
+    if (m.type === "teensy_sample") patchTeensySample(m.sample || {});
+    if (m.type === "log") line($("log"), `${m.entry.time} ${m.entry.text}`);
+  };
+  es.onerror = () => { es.close(); setTimeout(connectEvents, 1000); };
+}
+function previewKeyForD435() {
+  return d435Mode === "depth" ? "d435Depth" : "d435Rgb";
+}
+function pushPreviewBuffer(key, url) {
+  const buffer = previewBuffers[key];
+  buffer.urls.push(url);
+  while (buffer.urls.length > PREVIEW_BUFFER_FRAMES) {
+    const old = buffer.urls.shift();
+    if (old) URL.revokeObjectURL(old);
+  }
+}
+function clearPreviewBuffer(key) {
+  const buffer = previewBuffers[key];
+  for (const url of buffer.urls) URL.revokeObjectURL(url);
+  buffer.urls = [];
+  buffer.loading = false;
+  buffer.misses = 0;
+  buffer.generation += 1;
+}
+function d435PreviewFaultText() {
+  const summary = latestState.capture_summary?.streams?.d435 || {};
+  const gate = latestState.recording_gate?.streams?.d435 || {};
+  const state = latestState.d435 || {};
+  const stream = Object.keys(summary).length ? summary : gate;
+  if (stream.ok || gate.ok) return "";
+  const error = stream.last_error || gate.last_error || state.last_error;
+  if (error) return `D435 error: ${error}`;
+  if (stream.running || gate.running || state.running) return "D435 starting: waiting for RGB/depth frames";
+  return "D435 stopped or unavailable";
+}
+function showD435Unavailable(text) {
+  clearPreviewBuffer("d435Rgb");
+  clearPreviewBuffer("d435Depth");
+  const img = $("d435PreviewImg");
+  const placeholder = $("d435Placeholder");
+  img.removeAttribute("src");
+  img.style.display = "none";
+  placeholder.textContent = text;
+  placeholder.style.display = "block";
+  placeholder.className = "placeholder bad";
+}
+function showPreviewFailure(key, img, placeholder, text) {
+  const buffer = previewBuffers[key];
+  buffer.misses += 1;
+  if (buffer.urls.length > 0) {
+    placeholder.style.display = "none";
+    return;
+  }
+  img.style.display = "none";
+  placeholder.style.display = "block";
+  placeholder.textContent = text;
+}
+function loadBufferedPreview({key, url, img, placeholder, unavailableText, retainOnFailure=true}) {
+  const buffer = previewBuffers[key];
+  if (buffer.loading) return;
+  buffer.loading = true;
+  const generation = buffer.generation;
+  fetch(url, {cache:"no-store"})
+    .then((res) => {
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return res.blob();
+    })
+    .then((blob) => {
+      if (generation !== buffer.generation) return;
+      if (!blob || blob.size < 128) throw new Error("empty image");
+      const objectUrl = URL.createObjectURL(blob);
+      const probe = new Image();
+      probe.onload = () => {
+        if (generation !== buffer.generation) {
+          URL.revokeObjectURL(objectUrl);
+          return;
+        }
+        pushPreviewBuffer(key, objectUrl);
+        buffer.misses = 0;
+        img.src = objectUrl;
+        img.style.display = "block";
+        placeholder.style.display = "none";
+        placeholder.className = "placeholder";
+      };
+      probe.onerror = () => {
+        URL.revokeObjectURL(objectUrl);
+        showPreviewFailure(key, img, placeholder, unavailableText);
+      };
+      probe.src = objectUrl;
+    })
+    .catch(() => {
+      if (!retainOnFailure) {
+        showD435Unavailable(d435PreviewFaultText() || unavailableText);
+        return;
+      }
+      showPreviewFailure(key, img, placeholder, unavailableText);
+    })
+    .finally(() => {
+      if (generation === buffer.generation) buffer.loading = false;
+    });
+}
+function refreshImages(force=false) {
+  if (d435RefreshTimer !== null) {
+    clearTimeout(d435RefreshTimer);
+    d435RefreshTimer = null;
+  }
+  const t = Date.now();
+  const img = $("d435PreviewImg");
+  const placeholder = $("d435Placeholder");
+  const faultText = d435PreviewFaultText();
+  if (faultText) {
+    showD435Unavailable(faultText);
+    d435RefreshTimer = setTimeout(() => refreshImages(false), 125);
+    return;
+  }
+  const key = previewKeyForD435();
+  const next = d435Mode === "depth" ? `/d435/depth?t=${t}` : `/d435/rgb?t=${t}`;
+  loadBufferedPreview({
+    key,
+    url: next,
+    img,
+    placeholder,
+    unavailableText: `D435 ${d435Mode.toUpperCase()} preview unavailable`,
+    retainOnFailure: false,
+  });
+  d435RefreshTimer = setTimeout(() => refreshImages(false), 125);
+}
+const iphoneVideoElement = $("iphoneVideo");
+const iphonePlaceholder = $("iphonePlaceholder");
+let iphoneMediaSource = null;
+let iphoneSourceBuffer = null;
+let iphonePreviewSessionID = null;
+let iphoneLastFragmentIndex = 0;
+let iphonePreviewSyncing = false;
+let iphoneAppendQueue = [];
+let iphoneVideoObjectURL = null;
+
+function iphoneSourceOpen(mediaSource) {
+  if (mediaSource.readyState === "open") return Promise.resolve();
+  return new Promise(resolve => mediaSource.addEventListener("sourceopen", resolve, {once:true}));
+}
+function pumpIphoneAppendQueue() {
+  if (!iphoneSourceBuffer || iphoneSourceBuffer.updating || iphoneAppendQueue.length === 0) return;
+  const item = iphoneAppendQueue.shift();
+  const sourceBuffer = iphoneSourceBuffer;
+  const cleanup = () => {
+    sourceBuffer.removeEventListener("updateend", done);
+    sourceBuffer.removeEventListener("error", failed);
+  };
+  const done = () => { cleanup(); item.resolve(); pumpIphoneAppendQueue(); };
+  const failed = () => { cleanup(); item.reject(new Error("iPhone SourceBuffer append failed")); pumpIphoneAppendQueue(); };
+  sourceBuffer.addEventListener("updateend", done);
+  sourceBuffer.addEventListener("error", failed, {once:true});
+  try { sourceBuffer.appendBuffer(item.buffer); }
+  catch (error) { cleanup(); item.reject(error); pumpIphoneAppendQueue(); }
+}
+function appendIphoneBuffer(buffer) {
+  return new Promise((resolve, reject) => { iphoneAppendQueue.push({buffer, resolve, reject}); pumpIphoneAppendQueue(); });
+}
+async function fetchIphoneBuffer(path) {
+  const response = await fetch(path, {cache:"no-store"});
+  if (!response.ok) {
+    const error = new Error(`${path}: HTTP ${response.status}`);
+    error.httpStatus = response.status;
+    throw error;
+  }
+  return response.arrayBuffer();
+}
+async function resetIphonePlayer(manifest) {
+  iphoneAppendQueue = [];
+  if (iphoneSourceBuffer) { try { iphoneSourceBuffer.abort(); } catch (_) {} }
+  if (iphoneMediaSource) { try { iphoneMediaSource.endOfStream(); } catch (_) {} }
+  if (iphoneVideoObjectURL) URL.revokeObjectURL(iphoneVideoObjectURL);
+  iphoneMediaSource = new MediaSource();
+  iphoneVideoObjectURL = URL.createObjectURL(iphoneMediaSource);
+  iphoneVideoElement.src = iphoneVideoObjectURL;
+  await iphoneSourceOpen(iphoneMediaSource);
+  if (!MediaSource.isTypeSupported(manifest.mime_type)) throw new Error(`unsupported ${manifest.mime_type}`);
+  iphoneSourceBuffer = iphoneMediaSource.addSourceBuffer(manifest.mime_type);
+  iphoneSourceBuffer.mode = "segments";
+  iphoneSourceBuffer.addEventListener("updateend", pumpIphoneAppendQueue);
+  await appendIphoneBuffer(await fetchIphoneBuffer("/iphone/preview/init.mp4"));
+  iphonePreviewSessionID = manifest.session_id;
+  const keyframes = (manifest.fragments || []).filter(row => row.starts_with_key_frame);
+  const start = keyframes.length ? keyframes[Math.max(0, keyframes.length - 2)].index : (manifest.bootstrap_fragment_index || 1);
+  iphoneLastFragmentIndex = start - 1;
+}
+function updateIphonePlaybackPosition() {
+  if (!iphoneSourceBuffer || iphoneSourceBuffer.buffered.length === 0) return;
+  const start = iphoneSourceBuffer.buffered.start(0);
+  const end = iphoneSourceBuffer.buffered.end(iphoneSourceBuffer.buffered.length - 1);
+  if (!Number.isFinite(iphoneVideoElement.currentTime) || iphoneVideoElement.currentTime < start || iphoneVideoElement.currentTime === 0) {
+    iphoneVideoElement.currentTime = Math.max(start, end - 0.1);
+  }
+  // Only seek when meaningfully behind the live edge. A small threshold causes
+  // repeated H.264 decoder flushes at 1920x1440 — keep at 1.5s to absorb append jitter.
+  if (end - iphoneVideoElement.currentTime > 1.5) {
+    iphoneVideoElement.currentTime = Math.max(start, end - 0.1);
+  }
+  if (start < end - 12 && !iphoneSourceBuffer.updating) {
+    try { iphoneSourceBuffer.remove(start, end - 10); } catch (_) {}
+  }
+  iphoneVideoElement.style.display = "block";
+  iphonePlaceholder.style.display = "none";
+  iphoneVideoElement.play().catch(() => {});
+}
+async function syncIphonePreview() {
+  if (iphonePreviewSyncing || !("MediaSource" in window)) return;
+  iphonePreviewSyncing = true;
+  try {
+    const response = await fetch("/iphone/preview/manifest", {cache:"no-store"});
+    const manifest = await response.json();
+    if (!manifest.ready) {
+      iphoneVideoElement.style.display = "none";
+      iphonePlaceholder.style.display = "block";
+      iphonePlaceholder.textContent = "Waiting for iPhone H.264 V2 stream";
+      return;
+    }
+    if (iphonePreviewSessionID !== manifest.session_id || !iphoneSourceBuffer) await resetIphonePlayer(manifest);
+    if (manifest.latest_fragment_index < iphoneLastFragmentIndex) await resetIphonePlayer(manifest);
+    if (manifest.bootstrap_fragment_index > iphoneLastFragmentIndex + 1) await resetIphonePlayer(manifest);
+    const fragments = manifest.fragments
+      .filter(row => row.index > iphoneLastFragmentIndex)
+      .sort((a, b) => a.index - b.index);
+    if (fragments.length > 8) await resetIphonePlayer(manifest);
+    const liveFragments = manifest.fragments
+      .filter(row => row.index > iphoneLastFragmentIndex)
+      .sort((a, b) => a.index - b.index)
+      .slice(0, 4);
+    for (const fragment of liveFragments) {
+      if (fragment.index !== iphoneLastFragmentIndex + 1) { await resetIphonePlayer(manifest); break; }
+      await appendIphoneBuffer(await fetchIphoneBuffer(`/iphone/preview/${fragment.filename}`));
+      iphoneLastFragmentIndex = fragment.index;
+    }
+    updateIphonePlaybackPosition();
+  } catch (error) {
+    if (error && (error.httpStatus === 404 || error.httpStatus === 410)) {
+      iphonePreviewSessionID = null;
+      iphoneLastFragmentIndex = 0;
+      iphoneVideoElement.style.display = "none";
+      iphonePlaceholder.style.display = "block";
+      iphonePlaceholder.textContent = "Resyncing iPhone H.264 preview";
+      return;
+    }
+    iphoneVideoElement.style.display = "none";
+    iphonePlaceholder.style.display = "block";
+    iphonePlaceholder.textContent = `iPhone H.264 preview error: ${error.message || error}`;
+  } finally {
+    iphonePreviewSyncing = false;
+  }
+}
+function patchTeensySample(sample) {
+  if (sample.wrench) {
+    patchCoinFTPreview(sample);
+    return;
+  }
+  if (typeof sample.left_mean === "number") {
+    setCoinFTPreviewMode("raw");
+    coinLeftHistory.push(sample.left_mean);
+    coinRightHistory.push(sample.right_mean);
+    coinLeftHistory = coinLeftHistory.slice(-240);
+    coinRightHistory = coinRightHistory.slice(-240);
+    scheduleCoinFTDraw();
+  }
+}
+function forcePreviewVector(wrench, fallback) {
+  if (Array.isArray(wrench) && wrench.length >= 3) {
+    return [finiteNumber(wrench[0]), finiteNumber(wrench[1]), finiteNumber(wrench[2])];
+  }
+  return finiteNumber(fallback);
+}
+function setCoinFTPreviewMode(mode) {
+  if (coinftPreviewMode === mode) return;
+  coinftPreviewMode = mode;
+  coinLeftHistory = [];
+  coinRightHistory = [];
+}
+function patchCoinFTPreview(sample) {
+  const wrench = Array.isArray(sample.wrench) ? sample.wrench : null;
+  const rawMean = Array.isArray(sample.raw_mean) ? sample.raw_mean : [sample.left_mean, sample.right_mean];
+  const left = wrench && Array.isArray(wrench[0]) ? forcePreviewVector(wrench[0], rawMean[0]) : forcePreviewVector(sample.left_wrench, rawMean[0]);
+  const right = wrench && Array.isArray(wrench[1]) ? forcePreviewVector(wrench[1], rawMean[1]) : forcePreviewVector(sample.right_wrench, rawMean[1]);
+  setCoinFTPreviewMode(Array.isArray(left) || Array.isArray(right) ? "force" : "raw");
+  coinLeftHistory.push(left);
+  coinRightHistory.push(right);
+  coinLeftHistory = coinLeftHistory.slice(-600);
+  coinRightHistory = coinRightHistory.slice(-600);
+  scheduleCoinFTDraw();
+}
+function scheduleCoinFTDraw() {
+  const now = performance.now();
+  const delay = Math.max(0, 33 - (now - lastCoinDrawAt));
+  if (coinDrawTimer !== null) return;
+  coinDrawTimer = setTimeout(() => {
+    coinDrawTimer = null;
+    lastCoinDrawAt = performance.now();
+    drawCoinFT();
+  }, delay);
+}
+function drawCoinFT() {
+  const warning = coinftFaultText();
+  drawChart($("coinLeftChart"), coinLeftHistory, ["#1d4ed8", "#dc2626", "#15803d"], warning, {mode: coinftPreviewMode});
+  drawChart($("coinRightChart"), coinRightHistory, ["#1d4ed8", "#dc2626", "#15803d"], warning, {mode: coinftPreviewMode});
+}
+function chartContext(canvas) {
+  const ratio = Math.max(1, window.devicePixelRatio || 1);
+  const rect = canvas.getBoundingClientRect();
+  const w = Math.max(320, Math.round(rect.width || canvas.width));
+  const h = Math.max(96, Math.round(rect.height || canvas.height));
+  const pixelW = Math.round(w * ratio);
+  const pixelH = Math.round(h * ratio);
+  if (canvas.width !== pixelW || canvas.height !== pixelH) {
+    canvas.width = pixelW;
+    canvas.height = pixelH;
+  }
+  const ctx = canvas.getContext("2d");
+  ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+  return {ctx, w, h};
+}
+function drawChart(canvas, values, colors, warningText="", options={}) {
+  const {ctx, w, h} = chartContext(canvas);
+  const mode = options.mode || (values.some((value) => Array.isArray(value)) ? "force" : "raw");
+  ctx.clearRect(0, 0, w, h);
+  const vectorMode = mode === "force" && values.some((value) => Array.isArray(value));
+  let seriesList = [];
+  let latest = null;
+  let scale = null;
+  if (vectorMode) {
+    seriesList = [0, 1, 2].map((axis) => values.map((v) => Array.isArray(v) ? finiteNumber(v[axis]) : 0));
+    scale = chartScale(seriesList.flat(), "force");
+    latest = values[values.length - 1];
+  } else {
+    const series = values.map((value) => finiteNumber(value));
+    seriesList = [series];
+    scale = chartScale(series, "raw");
+    latest = series[series.length - 1];
+  }
+  const plot = chartPlot(ctx, w, h, scale, mode);
+  drawChartAxes(ctx, plot, scale, mode, colors);
+  ctx.save();
+  ctx.beginPath();
+  ctx.rect(plot.left, plot.top, plot.right - plot.left, plot.bottom - plot.top);
+  ctx.clip();
+  seriesList.forEach((items, idx) => drawSeries(ctx, items, colors[idx] || colors[0] || "#111827", plot, scale));
+  ctx.restore();
+  drawLatestReadout(ctx, latest, plot, mode);
+  if (warningText) drawChartWarning(ctx, warningText, w, h);
+}
+function chartPlot(ctx, w, h, scale, mode) {
+  const inset = 6;
+  ctx.save();
+  ctx.font = "11px system-ui, -apple-system, Segoe UI, sans-serif";
+  const tickWidth = Math.max(
+    24,
+    ...scale.ticks.map((tick) => ctx.measureText(compactChartNumber(tick)).width)
+  );
+  const unitWidth = ctx.measureText(mode === "force" ? "N" : "ADC").width;
+  ctx.restore();
+  const labelWidth = Math.max(tickWidth, unitWidth);
+  let left = Math.ceil(inset + labelWidth + 11);
+  let right = Math.max(left + 80, w - inset);
+  const maxLeft = Math.max(inset + 36, w * 0.32);
+  if (left > maxLeft) left = maxLeft;
+  if (right > w - inset) right = w - inset;
+  if (right - left < 80) left = Math.max(inset + 28, right - 80);
+  const top = Math.min(28, Math.max(22, h * 0.24));
+  const bottom = Math.max(top + 44, h - 24);
+  return {
+    left,
+    right,
+    top,
+    bottom: Math.min(bottom, h - inset),
+    labelX: Math.max(inset + labelWidth, left - 7),
+  };
+}
+function drawSeries(ctx, values, color, plot, scale) {
+  if (values.length < 2) return;
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 2;
+  ctx.lineJoin = "round";
+  ctx.lineCap = "round";
+  ctx.beginPath();
+  values.forEach((v, i) => {
+    const x = plot.left + i / Math.max(1, values.length - 1) * (plot.right - plot.left);
+    const y = valueToChartY(v, plot, scale);
+    if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+  });
+  ctx.stroke();
+}
+function valueToChartY(value, plot, scale) {
+  const span = Math.max(1e-9, scale.max - scale.min);
+  return plot.top + (1 - (value - scale.min) / span) * (plot.bottom - plot.top);
+}
+function niceCeil(value) {
+  if (!Number.isFinite(value) || value <= 0) return 1;
+  const exponent = Math.floor(Math.log10(value));
+  const base = 10 ** exponent;
+  const scaled = value / base;
+  const nice = scaled <= 1 ? 1 : (scaled <= 2 ? 2 : (scaled <= 5 ? 5 : 10));
+  return nice * base;
+}
+function chartScale(values, mode) {
+  const finite = values.filter((value) => Number.isFinite(value));
+  if (!finite.length) {
+    return mode === "force"
+      ? {min:-1, max:1, ticks:[-1, -0.5, 0, 0.5, 1]}
+      : {min:0, max:1, ticks:[0, 0.5, 1]};
+  }
+  if (mode === "force") {
+    const maxAbs = niceCeil(Math.max(1, ...finite.map((value) => Math.abs(value))));
+    return {min:-maxAbs, max:maxAbs, ticks:[-maxAbs, -maxAbs / 2, 0, maxAbs / 2, maxAbs]};
+  }
+  let min = Math.min(...finite);
+  let max = Math.max(...finite);
+  const padding = Math.max((max - min) * 0.15, 1);
+  min -= padding;
+  max += padding;
+  const step = niceCeil((max - min) / 4);
+  const niceMin = Math.floor(min / step) * step;
+  const niceMax = Math.ceil(max / step) * step;
+  const ticks = [];
+  for (let tick = niceMin; tick <= niceMax + step * 0.5 && ticks.length < 8; tick += step) ticks.push(tick);
+  return {min:niceMin, max:niceMax, ticks};
+}
+function chartNumber(value) {
+  const abs = Math.abs(value);
+  if (abs >= 1000000 || (abs > 0 && abs < 0.001)) return value.toExponential(1);
+  if (abs >= 100) return value.toFixed(0);
+  if (abs >= 10) return value.toFixed(1).replace(/\.0$/, "");
+  return value.toFixed(2).replace(/0+$/, "").replace(/\.$/, "");
+}
+function compactChartNumber(value) {
+  const abs = Math.abs(value);
+  if (abs >= 1000000) return `${chartNumber(value / 1000000)}M`;
+  if (abs >= 1000) return `${chartNumber(value / 1000)}k`;
+  return chartNumber(value);
+}
+function signedChartNumber(value) {
+  const text = chartNumber(value);
+  return value > 0 ? `+${text}` : text;
+}
+function drawChartAxes(ctx, plot, scale, mode, colors) {
+  ctx.save();
+  ctx.font = "11px system-ui, -apple-system, Segoe UI, sans-serif";
+  ctx.textBaseline = "middle";
+  ctx.textAlign = "right";
+  for (const tick of scale.ticks) {
+    const y = valueToChartY(tick, plot, scale);
+    ctx.strokeStyle = Math.abs(tick) < 1e-9 ? "#94a3b8" : "#e5eaf0";
+    ctx.lineWidth = Math.abs(tick) < 1e-9 ? 1.25 : 1;
+    ctx.setLineDash(Math.abs(tick) < 1e-9 ? [4, 4] : []);
+    ctx.beginPath();
+    ctx.moveTo(plot.left, y);
+    ctx.lineTo(plot.right, y);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = "#64748b";
+    ctx.fillText(compactChartNumber(tick), plot.labelX, y);
+  }
+  ctx.strokeStyle = "#cbd5e1";
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(plot.left, plot.top);
+  ctx.lineTo(plot.left, plot.bottom);
+  ctx.lineTo(plot.right, plot.bottom);
+  ctx.stroke();
+  const legend = mode === "force"
+    ? [{label:"Fx", color:colors[0]}, {label:"Fy", color:colors[1]}, {label:"Fz", color:colors[2]}]
+    : [{label:"raw mean", color:colors[0]}];
+  let x = plot.left;
+  ctx.textAlign = "left";
+  ctx.textBaseline = "top";
+  for (const item of legend) {
+    ctx.fillStyle = item.color || "#111827";
+    ctx.fillText(item.label, x, 6);
+    x += ctx.measureText(item.label).width + 12;
+  }
+  ctx.fillStyle = "#64748b";
+  ctx.textAlign = "right";
+  ctx.fillText(mode === "force" ? "N" : "ADC", plot.labelX, 6);
+  ctx.restore();
+}
+function drawLatestReadout(ctx, latest, plot, mode) {
+  if (latest === undefined || latest === null) return;
+  let text = "";
+  if (mode === "force" && Array.isArray(latest)) {
+    const fx = finiteNumber(latest[0]);
+    const fy = finiteNumber(latest[1]);
+    const fz = finiteNumber(latest[2]);
+    const magnitude = Math.sqrt(fx * fx + fy * fy + fz * fz);
+    text = `Fx ${signedChartNumber(fx)}N  Fy ${signedChartNumber(fy)}N  Fz ${signedChartNumber(fz)}N  |F| ${chartNumber(magnitude)}N`;
+  } else {
+    text = `raw ${chartNumber(finiteNumber(latest))}`;
+  }
+  ctx.save();
+  ctx.font = "12px system-ui, -apple-system, Segoe UI, sans-serif";
+  ctx.fillStyle = "#111827";
+  ctx.textAlign = "right";
+  ctx.textBaseline = "top";
+  const available = Math.max(20, Math.floor((plot.right - plot.left) / 7));
+  const clipped = text.length > available ? text.slice(0, available - 1) + "..." : text;
+  ctx.fillText(clipped, plot.right, 6);
+  ctx.restore();
+}
+function coinftFaultText() {
+  const coinft = latestState.coinft || latestState.teensy || {};
+  const summary = latestState.capture_summary || {};
+  const stream = summary.streams?.coinft || {};
+  const missing = coinft.missing_side || stream.missing_side;
+  const ageMs = typeof stream.age_ms === "number" ? stream.age_ms : null;
+  if (missing === "left") return "Left CoinFT lost: check higher-numbered Teensy UART wiring/power";
+  if (missing === "right") return "Right CoinFT lost: check lower-numbered Teensy UART wiring/power";
+  if (missing === "both") return "Both CoinFT UARTs lost: check CoinFT power/GND/UART";
+  if (missing === "unknown_one_side") return "One CoinFT UART is active, but side is not identified yet";
+  if (coinft.last_error) return coinft.last_error;
+  if (ageMs !== null && ageMs > 1000) return `CoinFT dual packet stale: ${(ageMs / 1000).toFixed(1)} s since last sample`;
+  if (coinftDriftWarning) return "Force drift detected (>0.3 N for 10 s while idle) — re-zero: click Start / Re-zero CoinFT";
+  return "";
+}
+
+// CoinFT drift detection: fires when not recording and any Fx/Fy/Fz exceeds threshold for 10 s
+const COINFT_DRIFT_THRESHOLD_N = 0.3;
+const COINFT_DRIFT_WARN_TICKS = 10;
+let coinftDriftTicks = 0;
+let coinftDriftWarning = false;
+
+function updateCoinftDrift(state) {
+  const control = state.recording_control || {};
+  if (control.active) {
+    // Reset while recording
+    coinftDriftTicks = 0;
+    coinftDriftWarning = false;
+    return;
+  }
+  const coinft = state.coinft || state.teensy || {};
+  const wrench = coinft.wrench;
+  if (!Array.isArray(wrench) || wrench.length < 2) {
+    // Not calibrated — cannot assess, do not trigger
+    coinftDriftTicks = 0;
+    coinftDriftWarning = false;
+    return;
+  }
+  let maxAbs = 0;
+  for (let side = 0; side < 2; side++) {
+    const sv = wrench[side];
+    if (Array.isArray(sv)) {
+      for (let axis = 0; axis < 3; axis++) {
+        const v = typeof sv[axis] === "number" ? Math.abs(sv[axis]) : 0;
+        if (v > maxAbs) maxAbs = v;
+      }
+    }
+  }
+  if (maxAbs > COINFT_DRIFT_THRESHOLD_N) {
+    coinftDriftTicks++;
+    if (coinftDriftTicks >= COINFT_DRIFT_WARN_TICKS) coinftDriftWarning = true;
+  } else {
+    coinftDriftTicks = 0;
+    coinftDriftWarning = false;
+  }
+}
+function drawChartWarning(ctx, text, w, h) {
+  ctx.save();
+  const x = 8;
+  const y = 18;
+  const width = Math.max(80, w - 16);
+  const height = Math.min(44, Math.max(30, h - 36));
+  ctx.fillStyle = "rgba(255,255,255,0.86)";
+  ctx.fillRect(x, y, width, height);
+  ctx.strokeStyle = "#dc2626";
+  ctx.lineWidth = 1;
+  ctx.strokeRect(x, y, width, height);
+  ctx.fillStyle = "#991b1b";
+  ctx.font = "13px system-ui, -apple-system, Segoe UI, sans-serif";
+  const maxChars = Math.max(20, Math.floor((width - 20) / 7));
+  const clipped = text.length > maxChars ? text.slice(0, maxChars - 1) + "..." : text;
+  ctx.fillText(clipped, x + 10, y + Math.min(27, height - 12));
+  ctx.restore();
+}
+fetch("/state").then(r => r.json()).then(s => { outputRoot = s.config.output_root; $("outputRoot").value = outputRoot; patchState(s.state || {}); refreshDatasets(); });
+connectEvents();
+refreshImages();
+setInterval(syncIphonePreview, 125);
+</script>
+</body>
+</html>

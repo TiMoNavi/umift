@@ -1,0 +1,13 @@
+aruco_dict:
+  predefined: DICT_4X4_50
+finger_markers:
+  left:
+    id: 0
+    marker_size_m: 0.016
+  right:
+    id: 1
+    marker_size_m: 0.016
+print:
+  dpi: 300
+  white_margin_mm: 2
+  outer_padding_mm: 4

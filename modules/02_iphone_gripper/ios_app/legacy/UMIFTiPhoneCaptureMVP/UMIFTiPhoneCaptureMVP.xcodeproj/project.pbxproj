@@ -1,0 +1,367 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 60;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		100000000000000000000001 /* UMIFTiPhoneCaptureMVPApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000001 /* UMIFTiPhoneCaptureMVPApp.swift */; };
+		100000000000000000000002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000002 /* ContentView.swift */; };
+		100000000000000000000003 /* CaptureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000003 /* CaptureManager.swift */; };
+		100000000000000000000004 /* ARPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000004 /* ARPreviewView.swift */; };
+			100000000000000000000005 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000005 /* ShareSheet.swift */; };
+			100000000000000000000006 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000006 /* Assets.xcassets */; };
+			100000000000000000000007 /* CoinFTReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000007 /* CoinFTReceiver.swift */; };
+			100000000000000000000008 /* GripperTestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000008 /* GripperTestManager.swift */; };
+			100000000000000000000009 /* UltraWidePreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000009 /* UltraWidePreviewView.swift */; };
+			100000000000000000000010 /* GripperTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000010 /* GripperTestView.swift */; };
+			100000000000000000000011 /* GripperArucoBridge.mm in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000011 /* GripperArucoBridge.mm */; };
+			100000000000000000000012 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 200000000000000000000014 /* opencv2.framework */; };
+			100000000000000000000013 /* TorchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200000000000000000000015 /* TorchController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		200000000000000000000000 /* UMIFTiPhoneCaptureMVP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UMIFTiPhoneCaptureMVP.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		200000000000000000000001 /* UMIFTiPhoneCaptureMVPApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UMIFTiPhoneCaptureMVPApp.swift; sourceTree = "<group>"; };
+		200000000000000000000002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		200000000000000000000003 /* CaptureManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureManager.swift; sourceTree = "<group>"; };
+		200000000000000000000004 /* ARPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARPreviewView.swift; sourceTree = "<group>"; };
+			200000000000000000000005 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
+			200000000000000000000006 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+			200000000000000000000007 /* CoinFTReceiver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinFTReceiver.swift; sourceTree = "<group>"; };
+			200000000000000000000008 /* GripperTestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GripperTestManager.swift; sourceTree = "<group>"; };
+			200000000000000000000009 /* UltraWidePreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UltraWidePreviewView.swift; sourceTree = "<group>"; };
+			200000000000000000000010 /* GripperTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GripperTestView.swift; sourceTree = "<group>"; };
+			200000000000000000000011 /* GripperArucoBridge.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = GripperArucoBridge.mm; sourceTree = "<group>"; };
+			200000000000000000000012 /* GripperArucoBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GripperArucoBridge.h; sourceTree = "<group>"; };
+			200000000000000000000013 /* UMIFTiPhoneCaptureMVP-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UMIFTiPhoneCaptureMVP-Bridging-Header.h"; sourceTree = "<group>"; };
+			200000000000000000000014 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = ../vendor/opencv2.framework; sourceTree = SOURCE_ROOT; };
+			200000000000000000000015 /* TorchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TorchController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+			300000000000000000000000 /* Frameworks */ = {
+				isa = PBXFrameworksBuildPhase;
+				buildActionMask = 2147483647;
+				files = (
+					100000000000000000000012 /* opencv2.framework in Frameworks */,
+				);
+				runOnlyForDeploymentPostprocessing = 0;
+			};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		400000000000000000000000 = {
+			isa = PBXGroup;
+				children = (
+					400000000000000000000001 /* App */,
+					400000000000000000000003 /* Frameworks */,
+					400000000000000000000002 /* Products */,
+				);
+			sourceTree = "<group>";
+		};
+		400000000000000000000001 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				200000000000000000000001 /* UMIFTiPhoneCaptureMVPApp.swift */,
+				200000000000000000000002 /* ContentView.swift */,
+				200000000000000000000003 /* CaptureManager.swift */,
+					200000000000000000000007 /* CoinFTReceiver.swift */,
+					200000000000000000000004 /* ARPreviewView.swift */,
+					200000000000000000000005 /* ShareSheet.swift */,
+					200000000000000000000010 /* GripperTestView.swift */,
+					200000000000000000000008 /* GripperTestManager.swift */,
+					200000000000000000000009 /* UltraWidePreviewView.swift */,
+					200000000000000000000015 /* TorchController.swift */,
+					200000000000000000000012 /* GripperArucoBridge.h */,
+					200000000000000000000011 /* GripperArucoBridge.mm */,
+					200000000000000000000013 /* UMIFTiPhoneCaptureMVP-Bridging-Header.h */,
+					200000000000000000000006 /* Assets.xcassets */,
+				);
+				path = App;
+			sourceTree = "<group>";
+		};
+		400000000000000000000002 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				200000000000000000000000 /* UMIFTiPhoneCaptureMVP.app */,
+			);
+				name = Products;
+				sourceTree = "<group>";
+			};
+			400000000000000000000003 /* Frameworks */ = {
+				isa = PBXGroup;
+				children = (
+					200000000000000000000014 /* opencv2.framework */,
+				);
+				name = Frameworks;
+				sourceTree = "<group>";
+			};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		500000000000000000000000 /* UMIFTiPhoneCaptureMVP */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 600000000000000000000001 /* Build configuration list for PBXNativeTarget "UMIFTiPhoneCaptureMVP" */;
+			buildPhases = (
+				700000000000000000000000 /* Sources */,
+				300000000000000000000000 /* Frameworks */,
+				700000000000000000000001 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UMIFTiPhoneCaptureMVP;
+			productName = UMIFTiPhoneCaptureMVP;
+			productReference = 200000000000000000000000 /* UMIFTiPhoneCaptureMVP.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		800000000000000000000000 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2600;
+				LastUpgradeCheck = 2600;
+				TargetAttributes = {
+					500000000000000000000000 = {
+						CreatedOnToolsVersion = 26.0;
+					};
+				};
+			};
+			buildConfigurationList = 600000000000000000000000 /* Build configuration list for PBXProject "UMIFTiPhoneCaptureMVP" */;
+			compatibilityVersion = "Xcode 15.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 400000000000000000000000;
+			productRefGroup = 400000000000000000000002 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				500000000000000000000000 /* UMIFTiPhoneCaptureMVP */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		700000000000000000000001 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				100000000000000000000006 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		700000000000000000000000 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				100000000000000000000001 /* UMIFTiPhoneCaptureMVPApp.swift in Sources */,
+				100000000000000000000002 /* ContentView.swift in Sources */,
+					100000000000000000000003 /* CaptureManager.swift in Sources */,
+					100000000000000000000007 /* CoinFTReceiver.swift in Sources */,
+					100000000000000000000004 /* ARPreviewView.swift in Sources */,
+					100000000000000000000005 /* ShareSheet.swift in Sources */,
+					100000000000000000000010 /* GripperTestView.swift in Sources */,
+					100000000000000000000008 /* GripperTestManager.swift in Sources */,
+					100000000000000000000009 /* UltraWidePreviewView.swift in Sources */,
+					100000000000000000000013 /* TorchController.swift in Sources */,
+					100000000000000000000011 /* GripperArucoBridge.mm in Sources */,
+				);
+				runOnlyForDeploymentPostprocessing = 0;
+			};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		900000000000000000000000 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		900000000000000000000001 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		900000000000000000000002 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 8M9CJB4YFP;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "UMI-FT Capture";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera access is required to record UMI-FT RGB frames and ARKit poses.";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Local network access is required to receive CoinFT UDP packets.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+					INFOPLIST_KEY_UIFileSharingEnabled = YES;
+					INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+					INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+					INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeRight";
+					FRAMEWORK_SEARCH_PATHS = (
+						"$(inherited)",
+						"$(PROJECT_DIR)/../vendor",
+					);
+					IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+					LD_RUNPATH_SEARCH_PATHS = (
+						"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.local.umift.capture.mvp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+					SUPPORTS_MACCATALYST = NO;
+					SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+					SWIFT_EMIT_LOC_STRINGS = YES;
+					SWIFT_OBJC_BRIDGING_HEADER = "App/UMIFTiPhoneCaptureMVP-Bridging-Header.h";
+					SWIFT_VERSION = 5.0;
+					TARGETED_DEVICE_FAMILY = 1;
+				};
+			name = Debug;
+		};
+		900000000000000000000003 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = 8M9CJB4YFP;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "UMI-FT Capture";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera access is required to record UMI-FT RGB frames and ARKit poses.";
+				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "Local network access is required to receive CoinFT UDP packets.";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+					INFOPLIST_KEY_UIFileSharingEnabled = YES;
+					INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+					INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+					INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeRight";
+					FRAMEWORK_SEARCH_PATHS = (
+						"$(inherited)",
+						"$(PROJECT_DIR)/../vendor",
+					);
+					IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+					LD_RUNPATH_SEARCH_PATHS = (
+						"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.local.umift.capture.mvp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+					SUPPORTS_MACCATALYST = NO;
+					SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+					SWIFT_EMIT_LOC_STRINGS = YES;
+					SWIFT_OBJC_BRIDGING_HEADER = "App/UMIFTiPhoneCaptureMVP-Bridging-Header.h";
+					SWIFT_VERSION = 5.0;
+					TARGETED_DEVICE_FAMILY = 1;
+				};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		600000000000000000000000 /* Build configuration list for PBXProject "UMIFTiPhoneCaptureMVP" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				900000000000000000000000 /* Debug */,
+				900000000000000000000001 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		600000000000000000000001 /* Build configuration list for PBXNativeTarget "UMIFTiPhoneCaptureMVP" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				900000000000000000000002 /* Debug */,
+				900000000000000000000003 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 800000000000000000000000 /* Project object */;
+}

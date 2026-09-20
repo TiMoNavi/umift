@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40mm" height="42mm" viewBox="0 0 40 42">
+  <rect x="0" y="0" width="40" height="42" fill="white"/>
+  <g transform="translate(4 3)">
+    <rect x="0" y="0" width="12" height="34" fill="white" stroke="black" stroke-width="0.15"/>
+    <polygon points="5,2 7,2 10,32 2,32" fill="black"/>
+    <rect x="4.25" y="20.8" width="3.5" height="1.1" rx="0.45" fill="white"/>
+    <circle cx="6" cy="26.2" r="0.65" fill="white"/>
+    <text x="6" y="39" font-size="2.2" text-anchor="middle" font-family="Arial, sans-serif" fill="black">LEFT</text>
+  </g>
+  <g transform="translate(24 3)">
+    <rect x="0" y="0" width="12" height="34" fill="white" stroke="black" stroke-width="0.15"/>
+    <polygon points="5,2 7,2 10,32 2,32" fill="black"/>
+    <rect x="4.55" y="18.0" width="2.9" height="1.1" rx="0.45" fill="white"/>
+    <rect x="4.10" y="24.0" width="3.8" height="1.1" rx="0.45" fill="white"/>
+    <text x="6" y="39" font-size="2.2" text-anchor="middle" font-family="Arial, sans-serif" fill="black">RIGHT</text>
+  </g>
+</svg>

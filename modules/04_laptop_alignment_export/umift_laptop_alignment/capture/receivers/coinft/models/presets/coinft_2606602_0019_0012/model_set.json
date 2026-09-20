@@ -1,0 +1,85 @@
+{
+  "schema": "umift.coinft.model_set.v1",
+  "model_set_id": "coinft_2606602_0019_0012",
+  "calibration_mode": "calibrated",
+  "tare_samples": 300,
+  "ignored_tare_samples": 10,
+  "moving_average_window": 5,
+  "raw_stability_window_s": 2.0,
+  "raw_stability_min_wait_s": 5.0,
+  "raw_stability_check_interval_s": 0.5,
+  "raw_stability_mean_delta_counts": 8.0,
+  "raw_stability_noise_std_counts": 20.0,
+  "raw_stability_required_passes": 3,
+  "runtime_settling_s": 5.0,
+  "final_tare_window_s": 2.0,
+  "bias_window_s": 1.0,
+  "zero_check_window_s": 1.0,
+  "zero_force_limit_n": 0.15,
+  "expected_sample_rate_hz": 100.0,
+  "mapping_rule": {
+    "left": "higher numbered active Teensy Serial/pins",
+    "right": "lower numbered active Teensy Serial/pins",
+    "packet_payload_order": [
+      "left_raw_12ch",
+      "right_raw_12ch"
+    ]
+  },
+  "side_order": [
+    "left",
+    "right"
+  ],
+  "slots": {
+    "left": {
+      "sensor_index": 0,
+      "slot_id": "left_finger_tip",
+      "hardware_label": "coinft_2606602_0019",
+      "model_path": "left/coinft_2606602_0019_MLP.onnx",
+      "norm_path": "left/coinft_2606602_0019_norm.json",
+      "axis_map": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "axis_sign": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "right": {
+      "sensor_index": 1,
+      "slot_id": "right_finger_tip",
+      "hardware_label": "coinft_2606602_0012",
+      "model_path": "right/coinft_2606602_0012_MLP.onnx",
+      "norm_path": "right/coinft_2606602_0012_norm.json",
+      "axis_map": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "axis_sign": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    }
+  },
+  "notes": [
+    "Verified optional preset for module 04; select this folder in the GUI or pass it with --coinft-config.",
+    "CoinFT boards do not expose electronic IDs; physical wiring must match this model_set.",
+    "Keep CFT24_MLP.onnx.data next to each ONNX file because these ONNX exports reference that external data filename."
+  ]
+}

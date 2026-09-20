@@ -1,0 +1,39 @@
+{
+  "schema": "umift.coinft.calibration_manifest.v1",
+  "physical_coinft_id": "coinft_2606602_0008",
+  "current_slot": "left",
+  "teensy_connection": "higher numbered active Serial/pins",
+  "calibration_date": "2026-06-25",
+  "archived_at": "2026-06-25 07:02:54",
+  "source_folder": "<original-developer-machine>",
+  "runtime_files": {
+    "onnx": "coinft_2606602_0008_MLP.onnx",
+    "onnx_external_data": "CFT24_MLP.onnx.data",
+    "norm_json": "coinft_2606602_0008_norm.json"
+  },
+  "audit_files": {
+    "torch_checkpoint": "coinft_2606602_0008_MLP.pth",
+    "result_plot": "coinft_2606602_0008_MLP_results.png",
+    "source_readme": "source_README.md"
+  },
+  "latest_test_result_from_source_readme": {
+    "Fx_RMSE_N": 1.201,
+    "Fy_RMSE_N": 0.684,
+    "Fz_RMSE_N": 5.545,
+    "Mx_RMSE_Nm": 0.050,
+    "My_RMSE_Nm": 0.040,
+    "Mz_RMSE_Nm": 0.033
+  },
+  "sha256": {
+    "coinft_2606602_0008_MLP.onnx": "60f2939f09e21dd705559e175b3a445777c457c26450e652aa3dd1862e728ce2",
+    "CFT24_MLP.onnx.data": "c0180b31c118246628e8cc9ec5fa6d487f8f29a0b2805e0380e5a93e998c0d21",
+    "coinft_2606602_0008_MLP.onnx.data": "c0180b31c118246628e8cc9ec5fa6d487f8f29a0b2805e0380e5a93e998c0d21",
+    "coinft_2606602_0008_norm.json": "f51192f188bbeb012ec960157f08bf2739ef26e462505ba75f52e8be8ba0b939",
+    "coinft_2606602_0008_MLP.pth": "2edb46df94a89495764137684cb5157cfe4183c672b2fcde94b3bc960e474ccb",
+    "coinft_2606602_0008_MLP_results.png": "77e63d28c2ca244e69ccc0a647f3471483f55172e9920cc855367b502d61514e"
+  },
+  "notes": [
+    "Runtime ONNX loading requires the external data file named CFT24_MLP.onnx.data next to the ONNX file.",
+    "This model is assigned to left only under the current wiring rule."
+  ]
+}

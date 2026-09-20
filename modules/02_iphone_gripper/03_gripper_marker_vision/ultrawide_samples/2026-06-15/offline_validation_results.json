@@ -1,0 +1,71 @@
+[
+  {
+    "file": "夹爪合.jpg",
+    "detected_ids": [
+      1
+    ],
+    "num_candidates": 1,
+    "num_rejected": 2,
+    "width_raw_m": 0.07851286079651677,
+    "mean_visible_z_m": 0.10295910495793414,
+    "left_tvec": null,
+    "right_tvec": [
+      0.039256430398258386,
+      0.07331269950949228,
+      0.10295910495793414
+    ],
+    "width_filtered_m": 0.07851286079651677,
+    "score_0_100": 0.0,
+    "nominal_z_used_m": 0.10631773352809741
+  },
+  {
+    "file": "夹爪开.jpg",
+    "detected_ids": [
+      0,
+      1
+    ],
+    "num_candidates": 2,
+    "num_rejected": 2,
+    "width_raw_m": 0.12160532540933981,
+    "mean_visible_z_m": 0.10967636209826068,
+    "left_tvec": [
+      -0.03632166070483217,
+      0.07578684906156229,
+      0.10515623571988757
+    ],
+    "right_tvec": [
+      0.08528366470450764,
+      0.08117951512152573,
+      0.1141964884766338
+    ],
+    "width_filtered_m": 0.12160532540933981,
+    "score_0_100": 100.0,
+    "nominal_z_used_m": 0.10631773352809741
+  },
+  {
+    "file": "闪光灯夹爪合.jpg",
+    "detected_ids": [],
+    "num_candidates": 0,
+    "num_rejected": 0,
+    "width_raw_m": null,
+    "mean_visible_z_m": null,
+    "left_tvec": null,
+    "right_tvec": null,
+    "width_filtered_m": null,
+    "score_0_100": null,
+    "nominal_z_used_m": 0.10631773352809741
+  },
+  {
+    "file": "闪光灯夹爪开.jpg",
+    "detected_ids": [],
+    "num_candidates": 0,
+    "num_rejected": 1,
+    "width_raw_m": null,
+    "mean_visible_z_m": null,
+    "left_tvec": null,
+    "right_tvec": null,
+    "width_filtered_m": null,
+    "score_0_100": null,
+    "nominal_z_used_m": 0.10631773352809741
+  }
+]

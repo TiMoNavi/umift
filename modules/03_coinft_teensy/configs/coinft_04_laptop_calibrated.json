@@ -1,0 +1,70 @@
+{
+  "schema": "umift.coinft.module04_calibration_config.v1",
+  "calibration_mode": "calibrated",
+  "tare_samples": 300,
+  "ignored_tare_samples": 10,
+  "moving_average_window": 5,
+  "mapping_rule": {
+    "left": "higher numbered active Teensy Serial/pins",
+    "right": "lower numbered active Teensy Serial/pins",
+    "packet_payload_order": [
+      "left_raw_12ch",
+      "right_raw_12ch"
+    ]
+  },
+  "slots": {
+    "left": {
+      "sensor_index": 0,
+      "slot_id": "left_finger_tip",
+      "hardware_label": "coinft_2606602_0019",
+      "model_path": "../assets/calibration/production/coinft_2606602_0019/coinft_2606602_0019_MLP.onnx",
+      "norm_path": "../assets/calibration/production/coinft_2606602_0019/coinft_2606602_0019_norm.json",
+      "axis_map": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "axis_sign": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "right": {
+      "sensor_index": 1,
+      "slot_id": "right_finger_tip",
+      "hardware_label": "coinft_2606602_0012",
+      "model_path": "../assets/calibration/production/coinft_2606602_0012/coinft_2606602_0012_MLP.onnx",
+      "norm_path": "../assets/calibration/production/coinft_2606602_0012/coinft_2606602_0012_norm.json",
+      "axis_map": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "axis_sign": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    }
+  },
+  "notes": [
+    "This file is intended for modules/04_laptop_alignment_export --coinft-config / UMIFT_COINFT_CONFIG.",
+    "Do not infer left/right from older fixed UART documentation.",
+    "Current production mapping is left=coinft_2606602_0019 and right=coinft_2606602_0012.",
+    "CoinFT boards do not expose an electronic ID; the physical wiring must match this config.",
+    "Keep CFT24_MLP.onnx.data next to each ONNX file because the exported ONNX references that external data filename."
+  ]
+}
