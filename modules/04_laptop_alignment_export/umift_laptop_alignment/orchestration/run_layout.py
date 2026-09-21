@@ -18,7 +18,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-import fcntl
+from umift_laptop_alignment.orchestration.file_lock import file_lock
 
 
 MODULE_DIR = Path(__file__).resolve().parents[2]
@@ -83,8 +83,9 @@ def write_json_atomic(path: Path, payload: Any) -> None:
     fd, tmp_name = tempfile.mkstemp(prefix=f".{path.name}.", suffix=".tmp", dir=path.parent)
     tmp_path = Path(tmp_name)
     try:
-        os.fchmod(fd, 0o644)
         with os.fdopen(fd, "w", encoding="utf-8") as handle:
+            if hasattr(os, "fchmod"):
+                os.fchmod(handle.fileno(), 0o644)
             handle.write(json.dumps(payload, indent=2, ensure_ascii=False) + os.linesep)
             handle.flush()
             os.fsync(handle.fileno())
@@ -97,13 +98,8 @@ def write_json_atomic(path: Path, payload: Any) -> None:
 def manifest_lock(manifest_path: Path):
     lock_path = manifest_path.with_name(f".{manifest_path.name}.lock")
     lock_path.parent.mkdir(parents=True, exist_ok=True)
-    with _MANIFEST_THREAD_LOCK:
-        with lock_path.open("a+", encoding="utf-8") as lock_file:
-            fcntl.flock(lock_file.fileno(), fcntl.LOCK_EX)
-            try:
-                yield
-            finally:
-                fcntl.flock(lock_file.fileno(), fcntl.LOCK_UN)
+    with _MANIFEST_THREAD_LOCK, file_lock(lock_path):
+        yield
 
 
 def relpath(path: Path, root: Path) -> str:

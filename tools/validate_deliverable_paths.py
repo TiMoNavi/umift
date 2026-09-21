@@ -25,7 +25,7 @@ TEXT_SUFFIXES = {
     ".c", ".cc", ".cpp", ".h", ".hpp", ".ini", ".json", ".md", ".py",
     ".sh", ".swift", ".txt", ".yaml", ".yml",
 }
-SKIP_DIRS = {".git", ".pio", "__pycache__", "runs", "third_party"}
+SKIP_DIRS = {".git", ".pio", ".venv", "venv", ".pytest_cache", "__pycache__", "runs", "third_party"}
 PLACEHOLDERS = ("<PATH_TO_DELIVERABLES>", "<original-developer-machine>", "<conda-env>")
 ABSOLUTE_PATH_RE = re.compile(
     r"(?<![A-Za-z0-9_])/(?:Users|Volumes)/[^\s\"'`<>]+"

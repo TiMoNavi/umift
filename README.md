@@ -4,6 +4,8 @@
 
 当前设计不要求 iPhone 直接连接 CoinFT，也不要求 CoinFT 通过网络或蓝牙进入 iPhone。所有关键同步先回到笔记本端完成，优先追求最快得到真实、可检查、可转换的数据。
 
+新电脑安装请先看 [快速上手](QUICKSTART.md) 和 [Windows / macOS 环境安装](docs/INSTALL.md)。核心依赖统一由根目录 `requirements.txt` 安装。当前 D435 的 GUI 一键采集控制仍仅支持 macOS，iPhone USB 接收链路也尚未移植到 Windows。
+
 ## 先看这里
 
 现在项目已经整理成“按模块开工”的入口。如果你是按部分推进，不想先读完整套总文档，建议直接从这里进入：

@@ -18,13 +18,13 @@ ${UMIFT_ROOT}
 
 ### 0.1 需要准备的软硬件
 
-- macOS 电脑，并安装完整 Xcode。当前已验证的 Xcode 位置是 `Xcode.app`。
+- macOS 电脑，并安装完整 Xcode。标准安装位置为 `/Applications/Xcode.app`。
 - iOS 17.0 或更高版本的 iPhone，开启开发者模式，通过 USB 连接、解锁并信任这台 Mac。
 - Intel RealSense D435/D435i。
 - 已刷写 CoinFT bridge 固件的 Teensy 和两路 CoinFT。
-- 已配置的 Python 3.9 Conda 环境。当前已验证的解释器是 `python3`。
+- 按根目录 [安装指南](../../../docs/INSTALL.md) 创建的 Python 3.11 / 3.12 虚拟环境。
 
-> 当前仓库还没有提交 `environment.yml` 或 `requirements.txt`。因此，对一台全新 Mac，Python 环境还不是可从仓库一键重建的部署项。本机正式采集应使用上面已验证的解释器，不要临时换成系统 `python3`。
+> 核心依赖已统一为根目录 `requirements.txt`。本指南后续硬件步骤面向 macOS；Windows 的网页启动请使用安装指南中的 PowerShell 命令。
 
 ### 0.2 项目文件层级
 
@@ -79,13 +79,12 @@ cd ${UMIFT_ROOT}
 test -f modules/04_laptop_alignment_export/entrypoints/receiver_web_gui.py \
   && echo "project files: ok"
 
-python3 --version
-
-python3 -c \
-  'import av, cv2, numpy, serial, zarr; print("python dependencies: ok")'
+source .venv/bin/activate
+python --version
+python tools/check_environment.py
 ```
 
-正常情况下应看到 `project files: ok`、`Python 3.9.x` 和 `python dependencies: ok`。如果任何一条失败，不要继续录制；先修复项目路径或 Conda 环境。
+正常情况下应看到 `project files: ok`、`Python 3.11.x` 或 `3.12.x`，以及 `Environment check: 0 error(s)`。如果任何一条失败，不要继续录制；先修复项目路径或虚拟环境。
 
 ### 0.4 安装 D435 运行库和一次性授权
 
@@ -149,7 +148,7 @@ done'
 ```bash
 cd ${UMIFT_ROOT}/modules/02_iphone_gripper/ios_app/UMIFTiPhoneCaptureCore
 
-DEVELOPER_DIR=Xcode.app/Contents/Developer \
+DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer \
   xcodebuild \
   -project UMIFTiPhoneCaptureCore.xcodeproj \
   -scheme UMIFTiPhoneCaptureCore \
@@ -161,7 +160,7 @@ DEVELOPER_DIR=Xcode.app/Contents/Developer \
 ```bash
 cd ${UMIFT_ROOT}/modules/02_iphone_gripper/ios_app/UMIFTiPhoneCaptureCore
 
-export DEVELOPER_DIR=Xcode.app/Contents/Developer
+export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer
 export DEVICE_UDID="<DEVICE_UDID>"
 
 xcodebuild \
@@ -183,7 +182,7 @@ xcrun devicectl device process launch \
   com.local.umift.capturecore
 ```
 
-如果 Xcode 安装在 `/Applications/Xcode.app`，将上面的 `DEVELOPER_DIR` 改为 `/Applications/Xcode.app/Contents/Developer`。如果报签名错误，需要在 Xcode 中打开 `UMIFTiPhoneCaptureCore.xcodeproj`，为 target 选择当前开发者账号的 Team，再重新执行命令。
+如果 Xcode 安装在其他位置，将上面的 `DEVELOPER_DIR` 改为该 Xcode 的实际 `Contents/Developer` 目录。如果报签名错误，需要在 Xcode 中打开 `UMIFTiPhoneCaptureCore.xcodeproj`，为 target 选择当前开发者账号的 Team，再重新执行命令。
 
 第一次打开 App 时：
 

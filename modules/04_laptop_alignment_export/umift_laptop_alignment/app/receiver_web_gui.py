@@ -12,6 +12,8 @@ import re
 import signal
 import shutil
 import subprocess
+import sys
+import tempfile
 import threading
 import time
 import webbrowser
@@ -24,6 +26,7 @@ from pathlib import Path
 from typing import Any
 
 from umift_laptop_alignment.app.http_handler import HTML, Handler
+from umift_laptop_alignment.app.platform_support import open_directory
 
 from umift_laptop_alignment.capture.receivers.iphone.archive_receiver_v2 import (
     DEFAULT_DEVICE_PORT,
@@ -70,14 +73,15 @@ from umift_laptop_alignment.pipeline.transforms.iphone_v2 import phone_clock_mod
 MODULE04_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_TCP_HOST = "127.0.0.1"
 DEFAULT_TCP_PORT = DEFAULT_DEVICE_PORT
-DEFAULT_D435_PREVIEW_DIR = Path("/tmp/umift_realsense_preview")
+D435_TEMP_ROOT = Path("/tmp") if sys.platform == "darwin" else Path(tempfile.gettempdir())
+DEFAULT_D435_PREVIEW_DIR = D435_TEMP_ROOT / "umift_realsense_preview"
 D435_CONTROL_SCRIPT = MODULE04_ROOT / "umift_laptop_alignment" / "capture" / "receivers" / "d435" / "control_capture_macos.sh"
 INSTALLED_D435_CONTROL_SCRIPT = Path("/usr/local/libexec/umift-laptop-alignment-d435/control_capture_macos.sh")
 INSTALLED_D435_RUNTIME_PID_FILE = INSTALLED_D435_CONTROL_SCRIPT.parent / ".runtime" / "capture.pid"
 D435_SUDOERS_INSTALL_SCRIPT = MODULE04_ROOT / "entrypoints" / "install_sudoers_macos.sh"
-D435_STREAM_LOG = Path("/tmp/umift_d435_preview.log")
-D435_RECORD_CONTROL_FILE = Path("/tmp/umift_d435_record_control.json")
-D435_STREAM_STATUS_FILE = Path("/tmp/umift_d435_stream_status.json")
+D435_STREAM_LOG = D435_TEMP_ROOT / "umift_d435_preview.log"
+D435_RECORD_CONTROL_FILE = D435_TEMP_ROOT / "umift_d435_record_control.json"
+D435_STREAM_STATUS_FILE = D435_TEMP_ROOT / "umift_d435_stream_status.json"
 IPHONE_FRESH_MAX_S = 2.0
 TEENSY_FRESH_MAX_S = 1.0
 D435_PREVIEW_FRESH_MAX_S = 2.5
@@ -1336,7 +1340,7 @@ class ReceiverBackend:
         if command == "open_output":
             with self.lock:
                 path = self.state.get("run_dir") or self.state.get("session_dir") or str(self.config.output_root)
-            subprocess.run(["open", str(path)], check=False)
+            open_directory(path)
             return {"ok": True, "command": command, "path": path}
         return {"ok": False, "command": command, "error": f"unknown main command: {command}"}
 
@@ -2568,7 +2572,7 @@ class ReceiverBackend:
             except (OSError, ValueError):
                 managed_pid = None
         managed_process_running = False
-        if isinstance(managed_pid, int) and managed_pid > 0:
+        if sys.platform == "darwin" and isinstance(managed_pid, int) and managed_pid > 0:
             try:
                 os.kill(managed_pid, 0)
                 managed_process_running = True
@@ -2688,6 +2692,15 @@ class ReceiverBackend:
             return self._start_d435_preview()
 
     def _start_d435_preview(self) -> bool:
+        if sys.platform != "darwin":
+            message = "D435 GUI capture control currently requires macOS."
+            with self.lock:
+                self.state["d435"] = {**self.state.get("d435", {}), "running": False, "last_error": message}
+                snapshot = dict(self.state)
+            self.broadcast({"type": "state", "state": snapshot})
+            self.log(message)
+            self.refresh_preflight_state()
+            return False
         with self.lock:
             existing = self.d435_process
         if existing is not None and existing.poll() is None:
@@ -2831,6 +2844,8 @@ class ReceiverBackend:
             return self._stop_d435_preview()
 
     def _stop_d435_preview(self) -> bool:
+        if sys.platform != "darwin":
+            return False
         with self.lock:
             process = self.d435_process
             log_handle = self.d435_log_handle
@@ -3627,6 +3642,8 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     if args.install_d435_sudoers:
+        if sys.platform != "darwin":
+            raise SystemExit("D435 sudoers installation requires macOS.")
         return subprocess.run(["bash", str(D435_SUDOERS_INSTALL_SCRIPT)], check=False).returncode
     config = ServerConfig(
         host=args.host,

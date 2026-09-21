@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import fcntl
 import os
 import shutil
 import threading
@@ -11,6 +10,7 @@ from contextlib import contextmanager
 from pathlib import Path
 from typing import Any, Iterator
 
+from umift_laptop_alignment.orchestration.file_lock import file_lock
 from umift_laptop_alignment.orchestration.run_layout import (
     append_sync_log,
     ensure_run_layout,
@@ -53,13 +53,8 @@ def dataset_export_lock(target_dir: Path) -> Iterator[None]:
     lock_path = target_dir / ".incremental_export.lock"
     with _EXPORT_LOCKS_GUARD:
         thread_lock = _EXPORT_THREAD_LOCKS.setdefault(target_dir, threading.RLock())
-    with thread_lock:
-        with lock_path.open("a+", encoding="utf-8") as lock_file:
-            fcntl.flock(lock_file.fileno(), fcntl.LOCK_EX)
-            try:
-                yield
-            finally:
-                fcntl.flock(lock_file.fileno(), fcntl.LOCK_UN)
+    with thread_lock, file_lock(lock_path):
+        yield
 
 
 def _episode_index(name: str) -> int:

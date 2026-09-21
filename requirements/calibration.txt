@@ -1,0 +1,9 @@
+# Optional module03 calibration/training. NI-DAQmx and PyriteUtility need
+# separate system/external setup; see docs/INSTALL.md.
+-r coinft-tools.txt
+scipy==1.13.1
+scikit-learn==1.5.2
+h5py==3.12.1
+# Last PyTorch series with macOS Intel wheels; GPU builds need separate setup.
+torch==2.2.2
+nidaqmx==1.0.1

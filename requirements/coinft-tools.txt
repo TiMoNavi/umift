@@ -1,0 +1,4 @@
+# Optional legacy CSV / plotting tools in module03; not needed for the GUI.
+-r ../requirements.txt
+matplotlib==3.9.4
+ntplib==0.4.0

@@ -6,7 +6,7 @@ import json
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler
 from pathlib import Path
-import subprocess
+from umift_laptop_alignment.app.platform_support import open_directory
 from typing import Any
 
 
@@ -188,7 +188,7 @@ class Handler(BaseHTTPRequestHandler):
         if self.path == "/open-output":
             with self.backend.lock:
                 path = self.backend.state.get("run_dir") or self.backend.state.get("session_dir") or str(self.backend.config.output_root)
-            subprocess.run(["open", str(path)], check=False)
+            open_directory(path)
             write_response(self, {"ok": True, "path": path})
             return
         self.send_error(HTTPStatus.NOT_FOUND)

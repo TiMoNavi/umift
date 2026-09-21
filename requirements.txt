@@ -1,0 +1,9 @@
+# Main GUI, CoinFT inference, marker vision, normalize/align/export.
+# Use 64-bit CPython 3.11 or 3.12. Keep NumPy 1.x and Zarr 2.x APIs.
+numpy==1.26.4
+opencv-contrib-python==4.10.0.84
+pyserial==3.5
+onnxruntime==1.20.1
+PyYAML==6.0.2
+zarr==2.18.7
+numcodecs==0.15.1

@@ -4,51 +4,32 @@
 
 ---
 
-## 1. 环境要求
+## 1. 先安装环境
 
-- macOS（Apple Silicon 或 Intel 均可）
-- Xcode + Command Line Tools（iPhone 部署和 RealSense 控制脚本需要）
-- Python 3.9+，需要以下包：
+新电脑先按 [安装与环境排错](docs/INSTALL.md) 安装。该文档分别提供 **Windows PowerShell** 和 **macOS** 可直接执行的虚拟环境、requirements、FFmpeg 和环境检查命令。
 
-```bash
-pip install av opencv-python numpy pyserial zarr
-# 运行测试还需要：
-pip install pytest
-```
+统一使用 64 位 Python **3.11 或 3.12**。核心依赖固定在根目录 `requirements.txt`；测试和旧标定工具的可选依赖放在 `requirements/`。
 
-推荐用 conda 管理环境：
+Windows 可启动网页后端并使用通用数据处理代码；现有 D435 的 GUI 一键采集控制仍仅支持 macOS，iPhone USB 接收链路也尚未移植到 Windows。完整硬件采集还需要 iPhone、D435、Teensy 和各自的系统工具链。
+
+## 2. 先验证无硬件页面
+
+macOS 在项目根目录执行（Windows 使用安装文档中的 PowerShell 命令）：
 
 ```bash
-conda create -n umift python=3.9
-conda activate umift
-pip install av opencv-python numpy pyserial zarr pytest
-```
-
-- iPhone 15 Pro 或更新（开启开发者模式，信任 Mac）
-- Intel RealSense D435 / D435i
-- Teensy 4.1 + 两路 CoinFT
-
----
-
-## 2. 解压后的基本检查
-
-```bash
-cd UMIFT_datacollect_source_20260812
 export UMIFT_ROOT="$PWD"
-
-# 确认项目文件完整
-test -f modules/04_laptop_alignment_export/entrypoints/receiver_web_gui.py \
-  && echo "project files: ok"
-
-# 确认 Python 依赖
-python3 -c 'import av, cv2, numpy, serial, zarr; print("python dependencies: ok")'
+source .venv/bin/activate
+python tools/check_environment.py
+python modules/04_laptop_alignment_export/entrypoints/receiver_web_gui.py --host 127.0.0.1 --port 8765 --no-open --no-auto-start
 ```
+
+浏览器打开 `http://127.0.0.1:8765/`。确认页面正常后按 Ctrl-C 停止，再配置实际硬件。环境检查通过不代表硬件已经连接。
 
 ---
 
 ## 3. 启动主 GUI（最常用的命令）
 
-进入 module04 目录，启动浏览器端采集控制台：
+以下为 **macOS 完整硬件采集** 命令，先按操作指南完成 D435 和 iPhone 部署，再进入 module04 目录：
 
 ```bash
 cd "$UMIFT_ROOT/modules/04_laptop_alignment_export"

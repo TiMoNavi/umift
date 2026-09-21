@@ -1,5 +1,7 @@
 # 模块 03：CoinFT + Teensy
 
+新电脑先按 [Windows / macOS 环境安装](../../docs/INSTALL.md) 创建虚拟环境并安装根目录 `requirements.txt`。可选的旧标定/训练依赖单独列出；D435 GUI 控制和 iPhone USB 接收目前仍有平台限制，见安装指南。
+
 这个目录现在按真实开工顺序重排，不再只是“资料堆放区”。
 
 如果你要在新窗口继续接手，先看：
